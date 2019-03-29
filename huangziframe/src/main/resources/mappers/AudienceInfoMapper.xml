@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.huangzi.huangziframe.mapper.IAudienceInfoMapper">
+
+    <!--获取观众信息列表-->
+    <select id="list" resultType="org.huangzi.huangziframe.dto.AudienceInfoDto">
+        SELECT
+        audienceInfo.ID,
+        audienceInfo.AUDIENCE_NAME,
+        audienceInfo.AUDIENCE_NICKNAME,
+        audienceInfo.AUDIENCE_ACCOUNT,
+        audienceInfo.AUDIENCE_LOGO,
+        audienceInfo.AUDIENCE_GENDER,
+        audienceInfo.AUDIENCE_AGE,
+        audienceInfo.AUDIENCE_IDCARD,
+        audienceInfo.AUDIENCE_PHONE,
+        audienceInfo.AUDIENCE_BANK,
+        audienceInfo.AUDIENCE_LOC
+        FROM AUDIENCE_INFO audienceInfo
+        WHERE audienceInfo.DELETE_FLAG = '0'
+
+        <if test="condition != null">
+            <if test="condition.audienceName != null and condition.audienceName != ''">
+                <bind name="audienceName" value="condition.audienceName+'%'"/>
+                AND audienceInfo.AUDIENCE_NAME LIKE #{audienceName}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.audienceNickname != null and condition.audienceNickname != ''">
+                <bind name="audienceNickname" value="condition.audienceNickname+'%'"/>
+                AND audienceInfo.AUDIENCE_NICKNAME LIKE #{audienceNickname}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.audienceAccount != null and condition.audienceAccount != ''">
+                <bind name="audienceAccount" value="condition.audienceAccount+'%'"/>
+                AND audienceInfo.AUDIENCE_ACCOUNT LIKE #{audienceAccount}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.audienceGender != null and condition.audienceGender != ''">
+                <bind name="audienceGender" value="condition.audienceGender+'%'"/>
+                AND audienceInfo.AUDIENCE_GENDER LIKE #{audienceGender}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.audienceAge != null and condition.audienceAge != ''">
+                <bind name="audienceAge" value="condition.audienceAge+'%'"/>
+                AND audienceInfo.AUDIENCE_AGE LIKE #{audienceAge}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.audienceIdcard != null and condition.audienceIdcard != ''">
+                <bind name="audienceIdcard" value="condition.audienceIdcard+'%'"/>
+                AND audienceInfo.AUDIENCE_IDCARD LIKE #{audienceIdcard}
+            </if>
+        </if>
+    </select>
+
+    <!--获取数据总数-->
+    <select id="getTotal" resultType="Integer">
+        SELECT COUNT(*) AS total FROM AUDIENCE_INFO WHERE DELETE_FLAG = '0'
+    </select>
+
+    <!--获取单个观众信息-->
+    <select id="getById" resultType="org.huangzi.huangziframe.dto.AudienceInfoDto">
+        SELECT
+        audienceInfo.ID,
+        audienceInfo.AUDIENCE_NAME,
+        audienceInfo.AUDIENCE_NICKNAME,
+        audienceInfo.AUDIENCE_ACCOUNT,
+        audienceInfo.AUDIENCE_LOGO,
+        audienceInfo.AUDIENCE_GENDER,
+        audienceInfo.AUDIENCE_AGE,
+        audienceInfo.AUDIENCE_IDCARD,
+        audienceInfo.AUDIENCE_PHONE,
+        audienceInfo.AUDIENCE_BANK,
+        audienceInfo.AUDIENCE_LOC
+        FROM AUDIENCE_INFO audienceInfo
+        WHERE audienceInfo.ID  LIKE #{id}
+        AND audienceInfo.DELETE_FLAG = '0'
+    </select>
+
+</mapper>

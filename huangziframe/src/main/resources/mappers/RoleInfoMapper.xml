@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.huangzi.huangziframe.mapper.IRoleInfoMapper">
+
+    <!--根据用户名id获取用户角色-->
+    <select id="getRoleByUserId" resultType="org.huangzi.huangziframe.dto.RoleInfoDto">
+        SELECT
+            roleInfo.ID,
+            roleInfo.ROLE_NAMEY,
+            roleInfo.ROLE_NAMEZ
+        FROM ROLE_INFO roleInfo,USER_ROLE userRole
+        WHERE userRole.ROLE_ID = roleInfo.ID
+        AND userRole.USER_ID = #{id}
+    </select>
+
+</mapper>
+
+

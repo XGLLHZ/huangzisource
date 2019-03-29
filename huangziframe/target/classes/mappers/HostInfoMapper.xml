@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.huangzi.huangziframe.mapper.IHostInfoMapper">
+
+    <!--获取主播信息列表-->
+    <select id="list" resultType="org.huangzi.huangziframe.dto.HostInfoDto">
+        SELECT
+        hostInfo.ID,
+        hostInfo.HOST_ROOM,
+        hostInfo.HOST_TYPE,
+        hostInfo.HOST_FLAG,
+        hostInfo.HOST_TITLE,
+        hostInfo.HOST_NAME,
+        hostInfo.HOST_NICKNAME,
+        hostInfo.HOST_ACCOUNT,
+        hostInfo.HOST_GENDER,
+        hostInfo.HOST_AGE,
+        hostInfo.HOST_IDCARD,
+        hostInfo.HOST_PHONE,
+        hostInfo.HOST_BANK,
+        hostInfo.HOST_LOC
+        FROM HOST_INFO hostInfo
+        WHERE hostInfo.DELETE_FLAG = '0'
+
+        <if test="condition != null">
+            <if test="condition.hostRoom !=null and condition.hostRoom != ''">
+                <bind name="hostRoom" value="condition.hostRoom+'%'"/>
+                AND hostInfo.HOST_ROOM LIKE #{hostRoom}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostType !=null and condition.hostType != ''">
+                <bind name="hostType" value="condition.hostType+'%'"/>
+                AND hostInfo.HOST_TYPE LIKE #{hostType}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostFlag !=null and condition.hostFlag != ''">
+                <bind name="hostFlag" value="condition.hostFlag+'%'"/>
+                AND hostInfo.HOST_FLAG LIKE #{hostFlag}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostName !=null and condition.hostName != ''">
+                <bind name="hostName" value="condition.hostName+'%'"/>
+                AND hostInfo.HOST_NAME LIKE #{hostName}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostNickname !=null and condition.hostNickname != ''">
+                <bind name="hostNickname" value="condition.hostNickname+'%'"/>
+                AND hostInfo.HOST_NICKNAME LIKE #{hostNickname}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostAccount !=null and condition.hostAccount != ''">
+                <bind name="hostAccount" value="condition.hostAccount+'%'"/>
+                AND hostInfo.HOST_ACCOUNT LIKE #{hostAccount}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostGender !=null and condition.hostGender != ''">
+                <bind name="hostGender" value="condition.hostGender+'%'"/>
+                AND hostInfo.HOST_GENDER LIKE #{hostGender}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostAge !=null and condition.hostAge != ''">
+                <bind name="hostRoom" value="condition.hostAge+'%'"/>
+                AND hostInfo.HOST_AGE LIKE #{hostAge}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostIdcard !=null and condition.hostIdcard != ''">
+                <bind name="hostIdcard" value="condition.hostIdcard+'%'"/>
+                AND hostInfo.HOST_IDCARD LIKE #{hostIdcard}
+            </if>
+        </if>
+    </select>
+
+    <!--获取数据总数-->
+    <select id="getTotal" resultType="Integer">
+        SELECT COUNT(*) AS total FROM HOST_INFO WHERE DELETE_FLAG = '0'
+    </select>
+
+    <!--获取单个主播信息-->
+    <select id="getById" resultType="org.huangzi.huangziframe.dto.HostInfoDto">
+        SELECT
+        hostInfo.ID,
+        hostInfo.HOST_ROOM,
+        hostInfo.HOST_TYPE,
+        hostInfo.HOST_FLAG,
+        hostInfo.HOST_TITLE,
+        hostInfo.HOST_NAME,
+        hostInfo.HOST_NICKNAME,
+        hostInfo.HOST_ACCOUNT,
+        hostInfo.HOST_GENDER,
+        hostInfo.HOST_AGE,
+        hostInfo.HOST_IDCARD,
+        hostInfo.HOST_PHONE,
+        hostInfo.HOST_BANK,
+        hostInfo.HOST_LOC
+        FROM HOST_INFO hostInfo
+        WHERE hostInfo.ID  LIKE #{id}
+        AND hostInfo.DELETE_FLAG = '0'
+    </select>
+
+</mapper>

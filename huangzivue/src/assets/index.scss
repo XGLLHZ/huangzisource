@@ -1,0 +1,20 @@
+//全局css文件，将styles文件中的scss文件引入到这里
+@import '../styles/index.scss';
+@import '../styles/kind.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100%;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  height: 100%;
+  text-align: center;
+}

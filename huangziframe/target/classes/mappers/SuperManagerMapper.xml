@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.huangzi.huangziframe.mapper.ISuperManagerMapper">
+
+    <!--获取超管信息列表-->
+    <select id="list" resultType="org.huangzi.huangziframe.dto.SuperManagerDto">
+        SELECT
+        superManager.ID,
+        superManager.SUPER_NAME,
+        superManager.SUPER_NICKNAME,
+        superManager.SUPER_ACCOUNT,
+        superManager.SUPER_GENDER,
+        superManager.SUPER_AGE,
+        superManager.SUPER_IDCARD,
+        superManager.SUPER_PHONE,
+        superManager.SUPER_BANK,
+        superManager.SUPER_LOC
+        FROM SUPER_MANAGER superManager
+        WHERE superManager.DELETE_FLAG = '0'
+
+        <if test="condition != null">
+            <if test="condition.superName != null and condition.superName != ''">
+                <bind name="superName" value="condition.superName+'%'"/>
+                AND superManager.SUPER_NAME LIKE #{superName}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.superNickname != null and condition.superNickname != ''">
+                <bind name="superNickname" value="condition.superNickname+'%'"/>
+                AND superManager.SUPER_NICKNAME LIKE #{superNickname}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.superAccount != null and condition.superAccount != ''">
+                <bind name="superAccount" value="condition.superAccount+'%'"/>
+                AND superManager.SUPER_ACCOUNT LIKE #{superAccount}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.superGender != null and condition.superGender != ''">
+                <bind name="superGender" value="condition.superGender+'%'"/>
+                AND superManager.SUPER_GENDER LIKE #{superGender}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.superAge != null and condition.superAge != ''">
+                <bind name="superAge" value="condition.superAge+'%'"/>
+                AND superManager.SUPER_AGE LIKE #{superAge}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.superIdcard != null and condition.superIdcard != ''">
+                <bind name="superIdcard" value="condition.superIdcard+'%'"/>
+                AND superManager.SUPER_IDCARD LIKE #{superIdcard}
+            </if>
+        </if>
+    </select>
+
+    <!--获取数据总数-->
+    <select id="getTotal" resultType="Integer">
+        SELECT COUNT(*) AS total FROM SUPER_MANAGER WHERE DELETE_FLAG = '0'
+    </select>
+
+    <!--获取单个超管信息-->
+    <select id="getById" resultType="org.huangzi.huangziframe.dto.SuperManagerDto">
+        SELECT
+        superManager.ID,
+        superManager.SUPER_NAME,
+        superManager.SUPER_NICKNAME,
+        superManager.SUPER_ACCOUNT,
+        superManager.SUPER_GENDER,
+        superManager.SUPER_AGE,
+        superManager.SUPER_IDCARD,
+        superManager.SUPER_PHONE,
+        superManager.SUPER_BANK,
+        superManager.SUPER_LOC
+        FROM SUPER_MANAGER superManager
+        WHERE superManager.ID  LIKE #{id}
+        AND superManager.DELETE_FLAG = '0'
+    </select>
+
+</mapper>

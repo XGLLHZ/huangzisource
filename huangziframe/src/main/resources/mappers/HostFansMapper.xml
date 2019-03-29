@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.huangzi.huangziframe.mapper.IHostFansMapper">
+
+    <!--获取粉丝信息列表-->
+    <select id="list" resultType="org.huangzi.huangziframe.dto.HostFansDto">
+        SELECT
+        hostFans.ID,
+        hostFans.AUDIENCE_ID,
+        hostFans.FANS_FLAG,
+        audienceInfo.AUDIENCE_NAME hostFansName,
+        audienceInfo.AUDIENCE_NICKNAME hostFansNickname,
+        audienceInfo.AUDIENCE_ACCOUNT hostFansAccount,
+        audienceInfo.AUDIENCE_GENDER hostFansGender,
+        audienceInfo.AUDIENCE_AGE hostFansAge,
+        audienceInfo.AUDIENCE_IDCARD hostFansIdcard,
+        audienceInfo.AUDIENCE_PHONE hostFansPhone,
+        audienceInfo.AUDIENCE_BANK hostFansBank,
+        audienceInfo.AUDIENCE_LOC hostFansLoc
+        FROM HOST_FANS hostFans,
+        AUDIENCE_INFO audienceInfo
+        WHERE hostFans.HOST_ID = #{hostId}
+        AND hostFans.AUDIENCE_ID = audienceInfo.ID
+        AND audienceInfo.DELETE_FLAG = '0'
+        AND hostFans.DELETE_FLAG = '0'
+
+        <if test="condition != null">
+            <if test="condition.hostFansName != null and condition.hostFansName != ''">
+                <bind name="hostFansName" value="condition.hostFansName+'%'" />
+                AND audienceInfo.AUDIENCE_NAME LIKE #{hostFansName}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostFansNickname != null and condition.hostFansNickname != ''">
+                <bind name="hostFansNickname" value="condition.hostFansNickname+'%'" />
+                AND audienceInfo.AUDIENCE_NICKNAME LIKE #{hostFansNickname}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostFansAccount != null and condition.hostFansAccount != ''">
+                <bind name="hostFansAccount" value="condition.hostFansAccount+'%'" />
+                AND audienceInfo.AUDIENCE_ACCOUNT LIKE #{hostFansAccount}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostFansGender != null and condition.hostFansGender != ''">
+                <bind name="hostFansGender" value="condition.hostFansGender+'%'" />
+                AND audienceInfo.AUDIENCE_GENDER LIKE #{hostFansGender}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostFansAge != null and condition.hostFansAge != ''">
+                <bind name="hostFansAge" value="condition.hostFansAge+'%'" />
+                AND audienceInfo.AUDIENCE_AGE LIKE #{hostFansAge}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostFansIdcard != null and condition.hostFansIdcard != ''">
+                <bind name="hostFansIdcard" value="condition.hostFansIdcard+'%'" />
+                AND audienceInfo.AUDIENCE_IDCARD LIKE #{hostFansIdcard}
+            </if>
+        </if>
+    </select>
+
+    <!--获取数据总数-->
+    <select id="getTotal" resultType="Integer">
+        SELECT COUNT(*) AS total FROM HOST_FANS WHERE DELETE_FLAG = '0'
+    </select>
+
+    <!--获取单个粉丝信息-->
+    <select id="getById" resultType="org.huangzi.huangziframe.dto.HostFansDto">
+        SELECT
+        hostFans.ID,
+        hostFans.AUDIENCE_ID,
+        hostFans.FANS_FLAG,
+        audienceInfo.AUDIENCE_NAME hostFansName,
+        audienceInfo.AUDIENCE_NICKNAME hostFansNickname,
+        audienceInfo.AUDIENCE_ACCOUNT hostFansAccount,
+        audienceInfo.AUDIENCE_GENDER hostFansGender,
+        audienceInfo.AUDIENCE_AGE hostFansAge,
+        audienceInfo.AUDIENCE_IDCARD hostFansIdcard,
+        audienceInfo.AUDIENCE_PHONE hostFansPhone,
+        audienceInfo.AUDIENCE_BANK hostFansBank,
+        audienceInfo.AUDIENCE_LOC hostFansLoc
+        FROM HOST_FANS hostFans,
+        AUDIENCE_INFO audienceInfo
+        WHERE hostFans.ID  LIKE #{id}
+        AND hostFans.DELETE_FLAG = '0'
+    </select>
+
+</mapper>
