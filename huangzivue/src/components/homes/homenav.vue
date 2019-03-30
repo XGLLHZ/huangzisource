@@ -19,20 +19,63 @@
         </div>
         <div class="loginbar">
           <ul>
-            <li><router-link to="/">历史</router-link></li>
-            <li><router-link to="/">关注</router-link></li>
-            <li><router-link to="/">消息</router-link></li>
-            <li><router-link to="/">登录</router-link></li>
+            <li>
+              <el-popover placement="bottom-end" title="历史" width="200" trigger="hover"
+                content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
+                <span slot="reference">历史</span>
+              </el-popover>
+            </li>
+            <li>
+              <el-popover placement="bottom-end" title="关注" width="200" trigger="hover"
+                content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
+                <span slot="reference">关注</span>
+              </el-popover>
+            </li>
+            <li>
+              <el-popover placement="bottom-end" title="消息" width="200" trigger="hover"
+                content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
+                <span slot="reference">消息</span>
+              </el-popover>
+            </li>
+            <li>
+              <el-popover placement="bottom-end" title="登录" width="250" trigger="hover">
+                <div><span>登录之后可以</span></div>
+                <div class="login-one">
+                  <span>发弹幕</span>
+                  <span>看高清</span>
+                  <span>关注主播</span>
+                </div>
+                <div class="login-one-button">
+                  <router-link to="/login"><el-button size="mini" round>登录</el-button></router-link>
+                  <el-button size="mini" round>注册-></el-button>
+                </div>
+                <span slot="reference">登录</span>
+              </el-popover>
+            </li>
           </ul>
         </div>
       </div>
     </div>
+
+    
+
   </div>
 </template>
 
 <script>
   export default {
-    name: 'homenav'
+    name: 'homenav',
+    data() {
+      return {
+        logindialogvisible: false
+      }
+    },
+    methods: {
+      login() {
+        this.logindialogvisible = true;
+
+      }
+    }
   }
 </script>
 
@@ -116,6 +159,25 @@
   height: 60px;
   float: right;
 }
+.el-popover {
+  color: #999999;
+  border-top: 3px solid red;
+}
+.el-popover button {
+  width: 46%;
+  color: red;
+  font-size: 15px;
+  border: 2px solid red;
+}
+.el-popover button:hover {
+  color: white;
+  border: 1px solid white;
+  background-color: red;
+}
+.login-one {
+  height: 100px;
+  background-color: antiquewhite
+}
 .rightbar ul {
   list-style-type: none;
   margin: 0;
@@ -128,15 +190,15 @@
   padding: 0;
   line-height: 3.6;
 }
-.rightbar li a {
+.rightbar li span {
   display: block;
   margin: 0;
-  padding: 0 10px 0 10px;
+  padding: 0 5px 0 5px;
   color: #999999;
   cursor: pointer;
   text-decoration: none;
 }
-.rightbar li a:hover {
+.rightbar li span:hover {
   color: red;
 }
 </style>

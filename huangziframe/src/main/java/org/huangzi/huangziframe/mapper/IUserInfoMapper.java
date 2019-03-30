@@ -1,6 +1,7 @@
 package org.huangzi.huangziframe.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.huangzi.huangziframe.dto.UserInfoDto;
 import org.huangzi.huangziframe.entity.UserInfoEntity;
 
@@ -24,6 +25,6 @@ public interface IUserInfoMapper extends BaseMapper<UserInfoEntity> {
      * @param userPassword
      * @return
      */
-    UserInfoDto getUserByNamePass(String userName,String userPassword);
+    UserInfoDto getUserByNamePass(@Param("userName") String userName, @Param("userPassword") String userPassword);
 
 }

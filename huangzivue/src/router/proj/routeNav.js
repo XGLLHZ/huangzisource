@@ -13,6 +13,16 @@ const routeNav = [
         path: '/huangzivideo',
         name: 'kinhuangzivideod',
         component: ()=>import('@/views/proj/huangzivideo/index')
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: ()=>import('@/views/base/logreg/login')
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: ()=>import('@/views/base/logreg/register')
     }
 ]
 

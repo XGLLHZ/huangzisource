@@ -1,5 +1,6 @@
 package org.huangzi.huangziframe.controller;
 
+import org.apache.ibatis.annotations.Param;
 import org.huangzi.huangziframe.dto.MenuInfoDto;
 import org.huangzi.huangziframe.dto.UserInfoDto;
 import org.huangzi.huangziframe.service.IUserInfoService;
@@ -28,7 +29,7 @@ public class LogRegController {
      * @return
      */
     @RequestMapping("/login")
-    public UserInfoDto login(@RequestBody UserInfoDto userInfoDto) {
+    public UserInfoDto login(@RequestBody @Param("userInfoDto") UserInfoDto userInfoDto) {
         return userInfoService.login(userInfoDto);
     }
 
