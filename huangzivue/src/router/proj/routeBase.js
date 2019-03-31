@@ -2,7 +2,10 @@ const routeBase = [
     {
         path: '/hostInfo',
         name: 'hostinfo',
-        component: ()=>import('@/views/base/hostinfo/index')
+        component: ()=>import('@/views/base/hostinfo/index'),
+        meta: {
+            requireAuth: true
+        }
     },
     {
         path: '/hostInfoEdit',

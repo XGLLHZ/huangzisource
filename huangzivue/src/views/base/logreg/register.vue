@@ -17,10 +17,10 @@
                         <el-input placeholder="请输入密码" v-model="registerModel.userPassword" type="password" clearable></el-input>
                     </el-form-item>
                     <el-form-item prop="userPasswordtwo">
-                        <el-input placeholder="请在此输入密码" v-model="registerModel.userPasswordtwo" type="password" clearable></el-input>
+                        <el-input placeholder="请在此输入密码" v-model="registerModel.userPasswordtwo" type="password" autocomplete="off" clearable></el-input>
                     </el-form-item>
+                    <el-button @click="registerSubmit()" class="content-three">注 册</el-button>
                 </el-form>
-                <div class="content"><el-button @click="registerSubmit()" class="content-three">注 册</el-button></div>
                 <div class="content">
                     <div class="content-five">
                         <span><router-link to="/login">已有账号直接登录</router-link></span>
@@ -51,12 +51,22 @@ export default {
     homefooter
   },
   data() {
+    var checkPass2 = (rule,value,callback) => {
+        if (value == '') {
+            callback(new Error('请再次输入密码！'))
+        } else if (value !== this.registerModel.userPassword) {
+            callback(new Error('两次输入密码不一致！'))
+        } else {
+            callback()
+        }
+    }
     return {
         loading: false,
         registerModel: {
             userName: '',
             userPassword: '',
-            userPasswordtwo: ''
+            userPasswordtwo: '',
+            userType: '4'
         },
         rules: {
             userName: [
@@ -68,11 +78,11 @@ export default {
                 // { min: 8,max: 16, pattern:/[0-9A-Za-z]{8,16}/, message: '密码长度在8-16之间，且为字母数字组合！', trigger: 'blur' }
             ],
             userPasswordtwo: [
-                { required: true, message: '请再次输入密码！', trigger: 'blur' }
+                { validator: checkPass2, trigger: 'blur' }
                 // { min: 8,max: 16, pattern:/[0-9A-Za-z]{8,16}/, message: '密码长度在8-16之间，且为字母数字组合！', trigger: 'blur' }
             ]
         }
-    }
+    };
   },
 
   methods: {
@@ -86,9 +96,9 @@ export default {
                     if (response && response.status == 200) {
                         var userinfo = response.data
                         if (userinfo.userName != null) {
-                            alert("登陆成功！")
+                            alert("注册成功！")
                         } else {
-                            alert("用户名或密码错误！")
+                            alert("用户名已被注册！")
                         }
                     }
                 }).catch(() => {

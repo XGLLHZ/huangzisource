@@ -16,8 +16,8 @@
                     <el-form-item prop="userPassword">
                         <el-input placeholder="请输入登录密码" v-model="loginModel.userPassword" type="password" clearable></el-input>
                     </el-form-item>
+                    <el-button @click="loginSubmit()" class="content-three">登 录</el-button>
                 </el-form>
-                <div class="content"><el-button @click="loginSubmit()" class="content-three">登 录</el-button></div>
                 <div class="content">
                     <div class="content-five">
                         <span><router-link to="/">忘记密码？</router-link></span>
@@ -72,17 +72,17 @@ export default {
       //登录
       loginSubmit() {
           this.loading = false
+          var path = this.$route.query.redirect
           this.$refs.loginRef.validate((valid) => {
               if (valid) {
                   loginApi(this.loginModel).then(response => {
                     this.loading = false
-                    if (response && response.status == 200) {
-                        var userinfo = response.data
-                        if (userinfo.userName != null) {
-                            alert("登陆成功！")
-                        } else {
-                            alert("用户名或密码错误！")
-                        }
+                    var userinfo = response.data
+                    if (response.status == 200 && userinfo.userName != null) {
+                        this.$router.push({path: path})
+                        this.$store.commit('login', userinfo)
+                    } else {
+                        alert("用户名或密码错误！")
                     }
                 }).catch(() => {
                     this.loading = false

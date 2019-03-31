@@ -5,6 +5,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
+import store from './store'
 //import axios from 'axios'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/index.scss'
@@ -22,7 +23,6 @@ new Vue({
   template: '<App/>'   //设置要挂载的元素，即vue文件中的template将被html的形式加入到html文件中
 })
 
-
 //vue项目启动时的文件加载顺序
 //1、确定将被挂载（替换）的元素，此处为index.html中的<div id="app"><div>
 //2、注册组件（此处只有组件App），选择其中用于替换挂载元素（第一步中的元素）的模板组件（<App/>），即用App.vue替换index.html中的<div id="app"><div>
@@ -33,4 +33,19 @@ new Vue({
    //4、根据文件地址，载入组件（First.vue），组件被渲染在<router-view/>中，显示在index.html中
 
 //祝您生活愉快
+
+//注册路由全局首位
+router.beforeEach((to,from,next) => {
+  var username = store.state.user.useranme
+  if (to.meta.requireAuth) {
+    if (username != null) {
+      alert("我已经登录了，要去初始化菜单了！")
+    } else {
+      alert("我没登录，要去登录页面了 ！")
+      next({path: '/login',query: {redirect: to.path}})
+    }
+  } else {
+    next();
+  }
+})
 
