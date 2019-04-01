@@ -38,7 +38,8 @@
               </el-popover>
             </li>
             <li>
-              <el-popover placement="bottom-end" title="登录" width="250" trigger="hover">
+              <!--登录dialog-->
+              <el-popover v-show="loginpopover" placement="bottom-end" title="登录" width="250" trigger="hover">
                 <div><span>登录之后可以</span></div>
                 <div class="login-one">
                   <span>发弹幕</span>
@@ -47,17 +48,21 @@
                 </div>
                 <div class="login-one-button">
                   <router-link to="/login"><el-button size="mini" round>登录</el-button></router-link>
-                  <el-button size="mini" round>注册-></el-button>
+                  <router-link to="/register"><el-button size="mini" round>注册-></el-button></router-link>
                 </div>
                 <span slot="reference">登录</span>
+              </el-popover>
+              <!--登陆后的dialog-->
+              <el-popover v-show="userpopover" placement="bottom-end" :title="'用户' + this.userInfo.userName" width="250" trigger="hover">
+                <div><span>皇子带主播！</span></div>
+                <el-button @click="logout()">退出</el-button>
+                <span slot="reference">{{this.userInfo.userName}}</span>
               </el-popover>
             </li>
           </ul>
         </div>
       </div>
     </div>
-
-    
 
   </div>
 </template>
@@ -67,15 +72,35 @@
     name: 'homenav',
     data() {
       return {
-        logindialogvisible: false
+        loginpopover: false,
+        userpopover: false,
+        userInfo: {
+          userName: '',
+          userTpe: ''
+        }
       }
     },
+    created() {
+      this.loginshow()
+    },
     methods: {
-      login() {
-        this.logindialogvisible = true;
+      loginshow() {
+        var username = this.$store.state.user.userName
+        if (username != null) {
+          this.userpopover = true
+          this.loginpopover = false
+          this.userInfo.userName = username
+        } else {
+          this.loginpopover = true
+          this.userpopover = false
+        }
+      },
 
+      logout() {
+        this.$store.commit('logout')
       }
     }
+
   }
 </script>
 
@@ -176,7 +201,6 @@
 }
 .login-one {
   height: 100px;
-  background-color: antiquewhite
 }
 .rightbar ul {
   list-style-type: none;

@@ -79,8 +79,10 @@ export default {
                     this.loading = false
                     var userinfo = response.data
                     if (response.status == 200 && userinfo.userName != null) {
-                        this.$router.push({path: path})
                         this.$store.commit('login', userinfo)
+                        console.log("用户信息以放入localStorage")
+                        this.$router.push(this.$route.query.redirect || '/')
+                        console.log("返回登录前的页面")
                     } else {
                         alert("用户名或密码错误！")
                     }

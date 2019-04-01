@@ -39,9 +39,8 @@ public class UserInfoServiceImpl implements IUserInfoService {
     @Override
     public UserInfoDto login(UserInfoDto userInfoDto) {
         UserInfoDto userInfoDtos = userInfoMapper.getUserByNamePass(userInfoDto.getUserName(),userInfoDto.getUserPassword());
-        RoleInfoDto roleInfoDto = new RoleInfoDto();
         if (userInfoDtos != null) {
-            roleInfoDto = roleInfoMapper.getRoleByUserId(userInfoDtos.getId());
+            RoleInfoDto roleInfoDto = roleInfoMapper.getRoleByUserId(userInfoDtos.getId());
             userInfoDtos.setRoleInfoDto(roleInfoDto);
             return userInfoDtos;
         } else {
