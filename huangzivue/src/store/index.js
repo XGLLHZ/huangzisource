@@ -11,17 +11,21 @@ export default new Vuex.Store({
     state: {
         user: {
             username: window.localStorage.getItem('user' || '[]') == null ? '' : JSON.parse(window.localStorage.getItem('user' || '[]')).userName,
-            usertype: window.localStorage.getItem('user' || '[]') == null ? '' : JSON.parse(window.localStorage.getItem('user' || '[]')).userType
-            // userrole: window.localStorage.getItem('user' || '[]') == null ? '' : JSON.parse(window.localStorage.getItem('user' || '[]')).roleInfoDto.roleNamey
-        }
+            usertype: window.localStorage.getItem('user' || '[]') == null ? '' : JSON.parse(window.localStorage.getItem('user' || '[]')).userType,
+            userrole: window.localStorage.getItem('user' || '[]') == null ? '' : JSON.parse(window.localStorage.getItem('user' || '[]')).roleInfoDto
+        },
+        routes: []
     },
     mutations: {
         login(state,user) {
             state.user = user
-            window.localStorage.setItem('user',JSON.stringify(user))
+            window.localStorage.setItem('user',JSON.stringify(user))   //以字符串的形式存入
         },
-        logout(state) {
-            window.localStorage.removeItem('user')
+        logout() {
+            window.localStorage.clear()
+        },
+        initMenu(state,menus) {
+            state.routes = menus
         }
     }
 })

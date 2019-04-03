@@ -78,7 +78,7 @@ export default {
                   loginApi(this.loginModel).then(response => {
                     this.loading = false
                     var userinfo = response.data
-                    if (response.status == 200 && userinfo.userName != null) {
+                    if (response && response.status == 200 && userinfo.userName != null) {
                         this.$store.commit('login', userinfo)
                         console.log("用户信息以放入localStorage")
                         this.$router.push(this.$route.query.redirect || '/')

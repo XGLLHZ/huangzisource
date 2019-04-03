@@ -6,6 +6,7 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import store from './store'
+import { initMenu } from './utils/menu'
 //import axios from 'axios'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/index.scss'
@@ -41,7 +42,7 @@ router.beforeEach((to,from,next) => {
   alert(username)
   if (to.meta.requireAuth) {
     if (username != null) {
-      alert("我已经登录了，要去初始化菜单了！")
+      // initMenu(router,store)
       next()
     } else {
       next({ path: '/login',query: { redirect: to.path } })

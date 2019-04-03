@@ -55,7 +55,7 @@
               <!--登陆后的dialog-->
               <el-popover v-show="userpopover" placement="bottom-end" :title="'用户' + this.userInfo.userName" width="250" trigger="hover">
                 <div><span>皇子带主播！</span></div>
-                <el-button @click="logout()">退出</el-button>
+                <div class="logout"><span @click="logout()">退出</span></div>
                 <span slot="reference">{{this.userInfo.userName}}</span>
               </el-popover>
             </li>
@@ -98,6 +98,8 @@
 
       logout() {
         this.$store.commit('logout')
+        alert(this.$store.state.user.userName+"    logout")
+        this.$router.push('/login')
       }
     }
 
@@ -223,6 +225,17 @@
   text-decoration: none;
 }
 .rightbar li span:hover {
+  color: red;
+}
+.logout {
+  margin: 10px 0 0 0;
+  padding: 0;
+}
+.logout span {
+  float: right;
+  cursor: pointer;
+}
+.logout span:hover {
   color: red;
 }
 </style>

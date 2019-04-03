@@ -1,5 +1,5 @@
 //主播信息接口
-import request from '@/utils/proj/request'
+import request from '@/utils/request'
 
 //列表
 export function getListHostInfo(params) {
