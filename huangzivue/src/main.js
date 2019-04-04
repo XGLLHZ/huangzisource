@@ -37,18 +37,23 @@ new Vue({
 // 祝您生活愉快
 
 //注册路由全局首位
+//    首先判断用户名是否为空，若不为空则再判断用户账号是否为普通用户，若不是，则初始化菜单，若是则过
+//    若用户名为空是，判断要去的路径是否需要登录才可访问，若是则携带路由作为参数前去登录页面
+//    若不用登录，则过
 router.beforeEach((to,from,next) => {
   var username = store.state.user.userName
-  alert(username)
-  if (to.meta.requireAuth) {
-    if (username != null) {
-      // initMenu(router,store)
+  var usertype = store.state.user.userType
+  if (username != null) {
+    if (usertype != '4') {
+      initMenu(router,store)
       next()
-    } else {
-      next({ path: '/login',query: { redirect: to.path } })
+    }else {
+      next()
     }
+  } else if (to.meta.requireAuth) {
+    next({ path: '/login',query: { redirect: to.path } })
   } else {
-    next();
+    next()
   }
 })
 

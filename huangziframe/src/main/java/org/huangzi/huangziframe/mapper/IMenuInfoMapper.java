@@ -12,7 +12,7 @@ import java.util.List;
 public interface IMenuInfoMapper {
 
     /**
-     * 根据角色id获取角色权限
+     * 通过用户id获取用户权限
      * @param id
      * @return
      */

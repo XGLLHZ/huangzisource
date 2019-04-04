@@ -27,7 +27,7 @@ public interface IUserInfoService {
     UserInfoDto register(UserInfoDto userInfoDto);
 
     /**
-     * 登录成功之后根据用户所具有的角色的id获取资源
+     * 通过用户id获取用户权限
      * @param id
      * @return
      */

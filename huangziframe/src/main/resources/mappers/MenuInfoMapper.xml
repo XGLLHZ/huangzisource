@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.huangzi.huangziframe.mapper.IMenuInfoMapper">
 
-    <!--通过角色id获取角色权限-->
+    <!--通过用户id获取用户权限-->
     <select id="list" resultType="org.huangzi.huangziframe.dto.MenuInfoDto">
         SELECT
             menuInfo.ID,
@@ -12,9 +12,12 @@
             menuInfo.MENU_COM_NAME,
             menuInfo.MENU_KEEPLIVE,
             menuInfo.MENU_REQUIREAUTH
-        FROM MENU_INFO menuInfo,MENU_ROLE menuRole
-        WHERE menuRole.MENU_ID = menuInfo.ID
-        AND menuRole.ID = #{id}
+        FROM USER_INFO userInfo,USER_ROLE userRole,ROLE_INFO roleInfo,MENU_ROLE menuRole,MENU_INFO menuInfo
+        WHERE userInfo.ID = userRole.USER_ID
+        AND userRole.ROLE_ID = roleInfo.ID
+        AND roleInfo.ID = menuRole.ROLE_ID
+        AND menuRole.MENU_ID = menuInfo.ID
+        AND userInfo.ID = #{id}
     </select>
 
 </mapper>

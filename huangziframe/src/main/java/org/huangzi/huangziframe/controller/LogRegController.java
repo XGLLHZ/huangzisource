@@ -44,7 +44,7 @@ public class LogRegController {
     }
 
     /**
-     * 用户登录成功之后通过用户所具有的角色的id来获取资源，以便渲染菜单
+     * 通过用户id获取用户权限，以便渲染菜单
      * @param id
      * @return
      */

@@ -8,7 +8,7 @@
           <li><router-link to="/alllive">全部</router-link></li>
           <li><router-link to="/kind">分类</router-link></li>
           <li><router-link to="/huangzivideo">皇子视频</router-link></li>
-          <li><router-link to="/hostInfo">皇子操作</router-link></li>
+          <li><router-link to="/login">皇子操作</router-link></li>
         </ul>
       </div>
       <div class="rightbar">
@@ -55,6 +55,16 @@
               <!--登陆后的dialog-->
               <el-popover v-show="userpopover" placement="bottom-end" :title="'用户' + this.userInfo.userName" width="250" trigger="hover">
                 <div><span>皇子带主播！</span></div>
+                <div v-show="sysmanage">
+                  <el-menu>
+                    <el-submenu index="1">
+                      <template slot="title">系统管理</template>
+                      <el-menu-item v-for="(item,index) in this.routes"
+                                    :index="index"
+                                    :key="index"><router-link :to="item.path">{{item.name}}</router-link></el-menu-item>
+                    </el-submenu>
+                  </el-menu>
+                </div>
                 <div class="logout"><span @click="logout()">退出</span></div>
                 <span slot="reference">{{this.userInfo.userName}}</span>
               </el-popover>
@@ -74,22 +84,40 @@
       return {
         loginpopover: false,
         userpopover: false,
+        sysmanage: false,
         userInfo: {
           userName: '',
           userTpe: ''
         }
       }
     },
+
     created() {
       this.loginshow()
     },
+
+    computed: {
+      user() {
+        return this.$store.state.user
+      },
+      routes() {
+        return this.$store.state.routes
+      }
+    },
+
     methods: {
       loginshow() {
         var username = this.$store.state.user.userName
+        var usertype = this.$store.state.user.userType
         if (username != null) {
           this.userpopover = true
           this.loginpopover = false
           this.userInfo.userName = username
+          if (usertype != '4') {
+            this.sysmanage = true
+          } else {
+            this.sysmanage = false
+          }
         } else {
           this.loginpopover = true
           this.userpopover = false
@@ -98,7 +126,6 @@
 
       logout() {
         this.$store.commit('logout')
-        alert(this.$store.state.user.userName+"    logout")
         this.$router.push('/login')
       }
     }
