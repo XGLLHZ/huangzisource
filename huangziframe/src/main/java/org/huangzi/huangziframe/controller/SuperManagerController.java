@@ -5,6 +5,7 @@ import org.huangzi.huangziframe.dto.SuperManagerDto;
 import org.huangzi.huangziframe.service.ISuperManagerService;
 import org.huangzi.huangziframe.util.BaseResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +31,7 @@ public class SuperManagerController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    public BaseResult list(SuperManagerDto superManagerDto){
+    public BaseResult list(@RequestBody SuperManagerDto superManagerDto){
         BaseResult baseResult = new BaseResult();
         Page<SuperManagerDto> page = superManagerService.list(superManagerDto);
         List<SuperManagerDto> list = page.getRecords();
@@ -47,7 +48,7 @@ public class SuperManagerController {
      */
     @RequestMapping("/get")
     @ResponseBody
-    public SuperManagerDto get(SuperManagerDto superManagerDto){
+    public SuperManagerDto get(@RequestBody SuperManagerDto superManagerDto){
         return superManagerService.getById(superManagerDto.getId());
     }
 
@@ -58,7 +59,7 @@ public class SuperManagerController {
      */
     @RequestMapping("/insert")
     @ResponseBody
-    public Integer insert(SuperManagerDto superManagerDto){
+    public Integer insert(@RequestBody SuperManagerDto superManagerDto){
         return superManagerService.insert(superManagerDto);
     }
 
@@ -69,7 +70,7 @@ public class SuperManagerController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public Integer delete(SuperManagerDto superManagerDto){
+    public Integer delete(@RequestBody SuperManagerDto superManagerDto){
         return superManagerService.delete(superManagerDto.getId());
     }
 
@@ -80,7 +81,7 @@ public class SuperManagerController {
      */
     @RequestMapping("/update")
     @ResponseBody
-    public Integer update(SuperManagerDto superManagerDto){
+    public Integer update(@RequestBody SuperManagerDto superManagerDto){
         return superManagerService.update(superManagerDto);
     }
 

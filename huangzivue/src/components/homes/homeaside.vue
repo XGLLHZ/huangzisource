@@ -74,7 +74,7 @@
     </div>
     <div class="aside-bootom">
       <el-button size="medium" round>皇子客户端</el-button>
-      <router-link to="/"><el-button size="medium" round>成为主播</el-button></router-link>
+      <router-link :to="{path:'/hostInfoEdit',query:{opType:'add'}}"><el-button size="medium" round>成为主播</el-button></router-link>
       <router-link to="" style="display:block">12318举报</router-link>
     </div>
   </div>
@@ -82,7 +82,16 @@
 
 <script>
   export default {
-    name: 'homeaside'
+    name: 'homeaside',
+    data() {
+      return {}
+    },
+
+    methods: {
+      goLive() {
+        this.$router.push({ path: '/hostInfoEdit',query: { opType: 'add' } })
+      }
+    }
   }
 </script>
 

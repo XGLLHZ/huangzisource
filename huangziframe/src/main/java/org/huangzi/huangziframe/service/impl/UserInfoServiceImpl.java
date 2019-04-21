@@ -3,7 +3,9 @@ package org.huangzi.huangziframe.service.impl;
 import org.huangzi.huangziframe.dto.MenuInfoDto;
 import org.huangzi.huangziframe.dto.RoleInfoDto;
 import org.huangzi.huangziframe.dto.UserInfoDto;
+import org.huangzi.huangziframe.entity.AudienceInfoEntity;
 import org.huangzi.huangziframe.entity.UserInfoEntity;
+import org.huangzi.huangziframe.mapper.IAudienceInfoMapper;
 import org.huangzi.huangziframe.mapper.IMenuInfoMapper;
 import org.huangzi.huangziframe.mapper.IRoleInfoMapper;
 import org.huangzi.huangziframe.mapper.IUserInfoMapper;
@@ -30,6 +32,9 @@ public class UserInfoServiceImpl implements IUserInfoService {
 
     @Autowired
     IMenuInfoMapper menuInfoMapper;
+
+    @Autowired
+    IAudienceInfoMapper audienceInfoMapper;
 
     /**
      * 用户登录
@@ -62,6 +67,10 @@ public class UserInfoServiceImpl implements IUserInfoService {
             UserInfoEntity userInfoEntitys = new UserInfoEntity();
             UserInfoEntity userInfoEntity = BeanConverterUtil.beanConvert(userInfoEntitys,userInfoDto);
             userInfoMapper.insert(userInfoEntity);
+            AudienceInfoEntity audienceInfoEntity = new AudienceInfoEntity();
+            audienceInfoEntity.setAudienceAccount(userInfoDto.getUserName());
+            audienceInfoEntity.setAudiencePassword(userInfoDto.getUserPassword());
+            audienceInfoMapper.insert(audienceInfoEntity);
             return userInfoDto;
         }
     }

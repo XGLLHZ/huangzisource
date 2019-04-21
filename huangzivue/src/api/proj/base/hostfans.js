@@ -1,20 +1,20 @@
-//主播信息接口
+//主播粉丝信息接口
 import request from '@/utils/request'
 
 //列表
-export function getListHostInfo(params) {
+export function getListRoomManager(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/list',
+        url: '/api/roommanager/list',
         data: params
     })
 }
 
 //单个
-export function getByIdHostInfo(params) {
+export function getByIdRoomManager(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/get',
+        url: '/api/roommanager/get',
         data: {
             id: params
         }
@@ -22,19 +22,19 @@ export function getByIdHostInfo(params) {
 }
 
 //增加
-export function addHostInfo(params) {
+export function addRoomManager(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/insert',
+        url: '/api/roommanager/insert',
         data: params
     })
 }
 
 //删除
-export function deleteHostInfo(params) {
+export function deleteRoomManager(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/delete',
+        url: '/api/roommanager/delete',
         data: {
             id: params
         }
@@ -42,12 +42,17 @@ export function deleteHostInfo(params) {
 }
 
 //修改
-export function updateHostInfo(params) {
+export function updateRoomManager(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/update',
+        url: '/api/roommanager/update',
         data: params
     })
 }
+
+
+
+
+
 
 

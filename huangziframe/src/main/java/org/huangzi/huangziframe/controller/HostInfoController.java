@@ -43,12 +43,12 @@ public class HostInfoController {
 
     /**
      * 获取单个主播信息
-     * @param id 主播id
+     * @param hostInfoDto 主播id
      * @return 主播信息
      */
     @RequestMapping("/get")
-    public HostInfoDto get(@RequestBody @Param("hostInfoDto") int id){
-        return hostInfoService.getById(id);
+    public HostInfoDto get(@RequestBody HostInfoDto hostInfoDto){
+        return hostInfoService.getById(hostInfoDto.getId());
     }
 
     /**

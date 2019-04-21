@@ -2,8 +2,14 @@ package org.huangzi.huangziframe.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.huangzi.huangziframe.dto.HostInfoDto;
+import org.huangzi.huangziframe.dto.UserInfoDto;
 import org.huangzi.huangziframe.entity.HostInfoEntity;
+import org.huangzi.huangziframe.entity.UserInfoEntity;
+import org.huangzi.huangziframe.entity.UserRoleEntity;
+import org.huangzi.huangziframe.mapper.IAudienceInfoMapper;
 import org.huangzi.huangziframe.mapper.IHostInfoMapper;
+import org.huangzi.huangziframe.mapper.IUserInfoMapper;
+import org.huangzi.huangziframe.mapper.IUserRoleMapper;
 import org.huangzi.huangziframe.service.IHostInfoService;
 import org.huangzi.huangziframe.util.BeanConverterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +27,15 @@ public class HostInfoServiceImpl implements IHostInfoService {
 
     @Autowired
     private IHostInfoMapper hostInfoMapper;
+
+    @Autowired
+    private IUserInfoMapper userInfoMapper;
+
+    @Autowired
+    private IAudienceInfoMapper audienceInfoMapper;
+
+    @Autowired
+    private IUserRoleMapper userRoleMapper;
 
     /**
      * 获取主播列表
@@ -61,6 +76,20 @@ public class HostInfoServiceImpl implements IHostInfoService {
      */
     @Override
     public Integer insert(HostInfoDto hostInfoDto) {
+        //将该用户的用户类型修改为主播类型
+        UserInfoDto userInfoDto = userInfoMapper.getUserByUsername(hostInfoDto.getHostAccount());
+        userInfoDto.setUserType(2);
+        UserInfoEntity userInfoEntitys = new UserInfoEntity();
+        UserInfoEntity userInfoEntity = BeanConverterUtil.beanConvert(userInfoEntitys,userInfoDto);
+        userInfoMapper.updateById(userInfoEntity);
+        //删除普通用户表中该用户的信息
+        audienceInfoMapper.deleteById(userInfoDto.getId());
+        //将主播角色赋予该用户
+        UserRoleEntity userRoleEntity = new UserRoleEntity();
+        userRoleEntity.setUserId(userInfoDto.getId());
+        userRoleEntity.setRoleId(2);
+        userRoleMapper.insert(userRoleEntity);
+        //增加主播信息
         HostInfoEntity hostInfoEntitys = new HostInfoEntity();
         HostInfoEntity hostInfoEntity = BeanConverterUtil.beanConvert(hostInfoEntitys,hostInfoDto);
         return hostInfoMapper.insert(hostInfoEntity);

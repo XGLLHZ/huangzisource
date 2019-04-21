@@ -63,7 +63,7 @@ public class HostInfoEntity {
      * 主播账号
      */
     @TableField("HOST_ACCOUNT")
-    private String hostAccount;
+        private String hostAccount;
 
     /**
      * 主播密码

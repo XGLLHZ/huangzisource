@@ -97,6 +97,7 @@ export default {
                         var userinfo = response.data
                         if (userinfo.userName != null) {
                             alert("注册成功！")
+                            this.$router.push('/login')
                         } else {
                             alert("用户名已被注册！")
                         }

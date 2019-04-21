@@ -1,20 +1,20 @@
-//主播信息接口
+//超管信息接口
 import request from '@/utils/request'
 
 //列表
-export function getListHostInfo(params) {
+export function getListSuperManager(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/list',
+        url: '/api/supermanager/list',
         data: params
     })
 }
 
 //单个
-export function getByIdHostInfo(params) {
+export function getByIdSuperManager(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/get',
+        url: '/api/supermanager/get',
         data: {
             id: params
         }
@@ -22,19 +22,19 @@ export function getByIdHostInfo(params) {
 }
 
 //增加
-export function addHostInfo(params) {
+export function addSuperManager(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/insert',
+        url: '/api/supermanager/insert',
         data: params
     })
 }
 
 //删除
-export function deleteHostInfo(params) {
+export function deleteSuperManager(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/delete',
+        url: '/api/supermanager/delete',
         data: {
             id: params
         }
@@ -42,12 +42,14 @@ export function deleteHostInfo(params) {
 }
 
 //修改
-export function updateHostInfo(params) {
+export function updateSuperManager(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/update',
+        url: '/api/supermanager/update',
         data: params
     })
 }
+
+
 
 

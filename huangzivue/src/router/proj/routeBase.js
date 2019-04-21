@@ -23,7 +23,10 @@ const routeBase = [
     {
         path: '/hostInfoEdit',
         name: 'hostInfoEdit',
-        component: ()=>import('@/views/base/hostinfo/edit')
+        component: ()=>import('@/views/base/hostinfo/edit'),
+        meta: {
+            requireAuth: true
+        }
     },
     {
         path: '/roommanager',
@@ -52,16 +55,16 @@ const routeBase = [
         component: ()=>import('@/views/base/hostfans/edit')
     },
     {
-        path: '/audienceinfo',
-        name: 'audienceinfo',
+        path: '/audience',
+        name: 'audience',
         component: ()=>import('@/views/base/audienceinfo/index'),
         meta: {
             requireAuth: true
         }
     },
     {
-        path: '/audienceinfoEdit',
-        name: 'audienceinfoEdit',
+        path: '/audienceEdit',
+        name: 'audienceEdit',
         component: ()=>import('@/views/base/audienceinfo/edit')
     }
 ]

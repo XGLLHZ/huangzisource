@@ -30,9 +30,31 @@
                   </div>
                 </div>
               </div>
-              <div class="live-live"></div>
+              <div class="live-live">
+                <div class="video-box">
+                  <div>
+                    <videoPlayer class="vjs-custom-skin videoPlayer" :options="playerOptions"></videoPlayer>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="live-barrage"></div>
+            <div class="live-barrage">
+              <div class="barrage-title"><span>贡献榜</span></div>
+              <div class="barrage-bar" >
+                <div class="barrage-list" v-for="(item, key) in barragelist">
+                  <el-row>
+                    <el-col>
+                      <span class="barrage-list-user">人世间子：</span><span class="barrage-list-content">{{item}}</span>
+                    </el-col>
+                  </el-row>
+                </div>
+              </div>
+              <div class="send-bar">
+                <el-input ref="input" placeholder="给主播来个弹幕吧！" size="medium" v-model="barragetext">
+                  <el-button slot="append" style="color: white" @click="sendBarrage()" @keydown.enter="sendBarrage()">发送</el-button>
+                </el-input>
+              </div>
+            </div>
           </div>
         </div>
         <div class="main-discuss">
@@ -54,12 +76,51 @@
 import homenav from '@/components/homes/homenav'
 import homeaside from '@/components/homes/homeaside'
 import homefooter from '@/components/homes/homefooter'
+import 'video.js/dist/video-js.css'
+import {videoPlayer} from 'vue-video-player'
+import 'videojs-flash'
 export default {
   name: 'alllive',
   components: {
     homenav,
     homeaside,
-    homefooter
+    homefooter,
+    videoPlayer
+  },
+  data() {
+    return {
+      playerOptions: {
+			sources: [{
+				type: 'rtmp/mp4',
+        src: 'rtmp://119.23.234.176:1935/live/my',
+        withCredentials: false
+			}],
+			height: '487',
+			techOrder: ['flash'],
+			autoplay: true,
+      controls: true,
+      language: 'zh-CN',
+      live: true
+      },
+      loading: false,
+      barragelist: [],
+      barragetext: ''
+		}
+  },
+
+  mounted(){
+      this.$refs.input.focus()
+      this.send = this.$start(document.querySelector('.videoPlayer', [0,0.2]))
+  },
+
+  methods: {
+    sendBarrage() {
+      this.barragelist.push(this.barragetext)
+      this.barragetext = ''
+      this.send({
+        text: this.barragelist
+      })
+    }
   }
 }
 </script>
@@ -210,5 +271,38 @@ export default {
   margin: 0;
   padding: 0;
   float: left;
+}
+.barrage-title {
+  margin: 0;
+  padding: 5px 0 5px 0;
+  width: 100%;
+  border-bottom: 1px solid #E5E4E4;
+}
+.barrage-title span {
+  color: #717479;
+  font-size: 18px;
+}
+.barrage-bar {
+  margin: 0 10px 0 10px;
+  padding: 0;
+  width: calc(100% - 20px);
+  height: 88.4%;
+  text-align: left;
+  overflow: auto;
+}
+.barrage-list {
+  margin: 0;
+  padding: 3px 0 3px 0;
+}
+.barrage-list-user {
+  color: #0DBC79;
+}
+.barrage-list-content {
+  color: #717479;
+}
+.send-bar {
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 </style>

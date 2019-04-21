@@ -5,6 +5,110 @@
       <homeaside style="float:left"></homeaside>
       <div class="main">
         <div class="main-content">
+          <div class="main-content-info">
+            <div class="add-info">
+              <el-form
+                      :inline="true"
+                      :model="hostinfoObj"
+                      :rules="rules"
+                      label-position="right"
+                      label-width="200px"
+                      ref="hostinfoRef">
+                      <el-row :gutter="0">
+                        <span class="el-form-item" style="margin: 10px">请填写个人信息</span>
+                      </el-row>
+                      <el-row :gutter="0">
+                        <el-col>
+                          <el-form-item label="姓名" prop="hostName">
+                            <el-input size="mini" style="width: 152px" placeholder="请与证件姓名保持一致" v-model="hostinfoObj.hostName"></el-input>
+                          </el-form-item>
+                        </el-col>
+                      </el-row>
+                      <el-row :gutter="0">
+                        <el-col>
+                          <el-form-item label="中华人民共和国居民身份证" prop="hostIdcard">
+                            <el-input size="mini" placeholder="请填写有效的证件号码" v-model="hostinfoObj.hostIdcard"></el-input>
+                          </el-form-item>
+                        </el-col>
+                      </el-row>
+                      <el-row :gutter="0">
+                        <el-col>
+                          <el-form-item label="性别" prop="hostGender">
+                            <el-select size="mini" v-model="hostinfoObj.hostGender">
+                              <el-option label="男" value="男"></el-option>
+                              <el-option label="女" value="女"></el-option>
+                            </el-select>
+                          </el-form-item>
+                        </el-col>
+                      </el-row>
+                      <el-row :gutter="0">
+                        <el-col>
+                          <el-form-item label="出生日期" prop="hostAge">
+                            <el-date-picker size="mini" placeholder="选择日期" v-model="hostinfoObj.hostAge"></el-date-picker>
+                          </el-form-item>
+                        </el-col>
+                      </el-row>
+                      <el-row :gutter="0">
+                        <el-col>
+                          <el-form-item label="家庭住址" prop="hostLoc">
+                            <el-input size="mini" style="width: 300px" placeholder="请与证件信息保持一致" v-model="hostinfoObj.hostLoc"></el-input>
+                          </el-form-item>
+                        </el-col>
+                      </el-row>
+                      <el-row :gutter="0">
+                        <el-col>
+                          <el-form-item label="联系电话" prop="hostPhone">
+                            <el-input size="mini" v-model="hostinfoObj.hostPhone"></el-input>
+                          </el-form-item>
+                        </el-col>
+                      </el-row>
+                      <el-row :gutter="0">
+                        <el-col>
+                          <el-form-item label="银行账号" prop="hostBank">
+                            <el-input size="mini" v-model="hostinfoObj.hostBank"></el-input>
+                          </el-form-item>
+                        </el-col>
+                      </el-row>
+                      <el-row :gutter="0">
+                        <span class="el-form-item" style="margin: 10px">请填写直播信息</span>
+                      </el-row>
+                      <el-row :gutter="0">
+                        <el-col>
+                          <el-form-item label="直播类型" prop="hostType">
+                            <el-select size="mini" placeholder="请选择直播类型" v-model="hostinfoObj.hostType">
+                              <el-option label="英雄联盟" value="1"></el-option>
+                              <el-option label="绝地求生" value="2"></el-option>
+                              <el-option label="魔兽世界" value="3"></el-option>
+                              <el-option label="炉石传说" value="4"></el-option>
+                              <el-option label="守望先锋" value="5"></el-option>
+                              <el-option label="CSGO" value="6"></el-option>
+                              <el-option label="刀塔二" value="7"></el-option>
+                              <el-option label="仙剑" value="8"></el-option>
+                              <el-option label="NBA2K online" value="9"></el-option>
+                              <el-option label="户外直播" value="10"></el-option>
+                            </el-select>
+                          </el-form-item>
+                        </el-col>
+                      </el-row>
+                      <el-row :gutter="0">
+                        <el-col>
+                          <el-form-item label="主播昵称" prop="hostNickname">
+                            <el-input size="mini" v-model="hostinfoObj.hostNickname"></el-input>
+                          </el-form-item>
+                        </el-col>
+                      </el-row>
+                      <el-row :gutter="0">
+                        <el-col>
+                          <el-form-item label="直播标题" prop="hostTitle">
+                            <el-input size="mini" v-model="hostinfoObj.hostTitle"></el-input>
+                          </el-form-item>
+                        </el-col>
+                      </el-row>
+              </el-form>
+              <el-button style="margin: 5px 0px 10px 0px;width:130px" type="primary" @click="confirm()">提交</el-button>
+              <el-button style="margin: 5px 0px 10px 10px;width:130px" @click="cancel()">取消</el-button>
+            </div>
+          </div> 
         </div>
         <!--<homefooter></homefooter>-->
       </div>
@@ -16,6 +120,7 @@
 import homenav from '@/components/homes/homenav'
 import homeaside from '@/components/homes/homeaside'
 import homefooter from '@/components/homes/homefooter'
+import { addHostInfo, getByIdHostInfo, updateHostInfo } from '@/api/proj/base/hostinfo.js'
 export default {
   name: 'index',
   components: {
@@ -23,6 +128,129 @@ export default {
     homeaside,
     homefooter
   },
+  data() {
+    return {
+      hostinfoObj: {
+        hostAccount: this.$store.state.user.userName,
+        hostPassword: this.$store.state.user.userPassword,
+        hostRoom: '',
+        hostType: '',
+        hostFlag: '',
+        hostTitle: '',
+        hostName: '',
+        hostNickname: '',
+        hostGender: '',
+        hostAge: '',
+        hostIdcard: '',
+        hostPhone: '',
+        hostBank: '',
+        hostLoc: ''
+      },
+      rules: {
+        hostName: [
+          { required: true, message: '姓名不能为空！', trigger: 'blur' }
+        ],
+        hostIdcard: [
+          { required: true, message: '证件号码不能为空！', trigger: 'blur' },
+          { min: 18, max: 18, message: '证件号码格式不正确！', trigger: 'blur' }
+        ],
+        hostGender: [
+          { required: true, message: '性别不能为空！', trigger: 'blur' }
+        ],
+        hostAge: [
+          { required: true, message: '出生日期不能为空！', trigger: 'blur' }
+        ],
+        hostLoc: [
+          { required: true, message: '家庭住址不能为空！', trigger: 'blur' }
+        ],
+        hostPhone: [
+          { required: true, message: '联系电话不能为空！', trigger: 'blur' },
+          { min: 11, max: 11, message: '手机号格式不正确！', trigger: 'blur' }
+        ],
+        hostBank: [
+          { required: true, message: '银行账号不能为空！', trigger: 'blur' },
+          { min: 16, max: 19, message: '银行账号格式不正确！', trigger: 'blur' }
+        ],
+        hostType: [
+          { required: true, message: '直播类型不能为空！', trigger: 'blur' }
+        ],
+        hostTitle: [
+          { required: true, message: '直播标题不能为空！', trigger: 'blur' }
+        ],
+        hostNickname: [
+          { required: true, message: '主播昵称不能为空！', trigger: 'blur' }
+        ]
+      }
+    }
+  },
+
+  created() {
+    this.getById()
+  },
+
+  methods: {
+
+    //保存
+    confirm() {
+      if (this.$route.query.opType === 'add') {
+        this.$refs.hostinfoRef.validate((valid) => {
+          if (valid) {
+            addHostInfo(this.hostinfoObj).then(() => {
+              this.$notify({
+                title: '保存成功',
+                message: '保存成功',
+                type: 'success',
+                position: 'bottom-right'
+              });
+            this.$router.go(-1)
+            }).catch(() => {
+              this.$notify({
+                title: '保存失败',
+                message: '保存失败',
+                type: 'error',
+                position: 'bottom-right'
+              });
+            })
+          } else {}
+        });
+      }
+      if (this.$route.query.opType === 'update') {
+          this.$refs.hostinfoRef.validate((valid) => {
+              if (valid) {
+                  updateHostInfo(this.hostinfoObj).then(() => {
+                        this.$notify({
+                        title: '修改成功',
+                        message: '修改成功',
+                        type: 'success',
+                        position: 'bottom-right'
+                    });
+                    this.$router.go(-1)
+                  }).catch(() => {
+                      this.$notify({
+                        title: '修改失败',
+                        message: '修改失败',
+                        type: 'error',
+                        position: 'bottom-right'
+                    });
+                  })
+              }
+          })
+      } else {}
+    },
+
+    cancel() {
+        this.$router.go(-1)
+    },
+
+    getById() {
+        if(this.$route.query.opType === 'update' && this.$route.query.id != null) {
+            getByIdHostInfo(this.$route.query.id).then(response => {
+                this.hostinfoObj = response.data
+            }).catch(() => {});
+        }
+    }
+
+  }
   
 }
 </script>
@@ -50,6 +278,23 @@ export default {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
+}
+.main-content-info {
+  margin: 0 1%;
+  padding: 10px 0 0 0;
+  width: 98%;
+  vertical-align: middle;
+}
+.add-info {  
+  margin: 0 0 1% 0;
+  padding: 0;
+  width: 100%;
+  border: 1px solid #E5E4E4;
+  background-color: white;
+  border-radius: 5px;
+}
+.el-form-item {
+  margin: 0 0 10px 10px;
+  float: left;
 }
 </style>

@@ -60,13 +60,13 @@
                     <el-submenu index="1">
                       <template slot="title">系统管理</template>
                       <el-menu-item v-for="(item,index) in this.routes"
-                                    :index="index"
-                                    :key="index"><router-link :to="item.path">{{item.name}}</router-link></el-menu-item>
+                                    :index="index+1"
+                                    :key="index" @click="goPath(item.path)">{{item.name}}</el-menu-item>
                     </el-submenu>
                   </el-menu>
                 </div>
                 <div class="logout"><span @click="logout()">退出</span></div>
-                <span slot="reference">{{this.userInfo.userName}}</span>
+                <span slot="reference">我</span>
               </el-popover>
             </li>
           </ul>
@@ -106,6 +106,7 @@
     },
 
     methods: {
+
       loginshow() {
         var username = this.$store.state.user.userName
         var usertype = this.$store.state.user.userType
@@ -127,6 +128,10 @@
       logout() {
         this.$store.commit('logout')
         this.$router.push('/login')
+      },
+
+      goPath(path) {
+        this.$router.push(path)
       }
     }
 

@@ -1,20 +1,20 @@
-//主播信息接口
+//用户详情接口
 import request from '@/utils/request'
 
 //列表
-export function getListHostInfo(params) {
+export function getListAudience(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/list',
+        url: '/api/audience/list',
         data: params
     })
 }
 
 //单个
-export function getByIdHostInfo(params) {
+export function getByIdAudience(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/get',
+        url: '/api/audience/get',
         data: {
             id: params
         }
@@ -22,19 +22,19 @@ export function getByIdHostInfo(params) {
 }
 
 //增加
-export function addHostInfo(params) {
+export function addAudience(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/insert',
+        url: '/api/audience/insert',
         data: params
     })
 }
 
 //删除
-export function deleteHostInfo(params) {
+export function deleteAudience(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/delete',
+        url: '/api/audience/delete',
         data: {
             id: params
         }
@@ -42,12 +42,14 @@ export function deleteHostInfo(params) {
 }
 
 //修改
-export function updateHostInfo(params) {
+export function updateAudience(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/update',
+        url: '/api/audience/update',
         data: params
     })
 }
+
+
 
 

@@ -12,7 +12,7 @@
                   <span>主播信息管理</span>
                 </div>
                 <div class="header-title-button">
-                  <el-button size="small " type="primary"><i class="el-icon-search" @click="getList()"></i>查询</el-button>
+                  <el-button size="small " type="primary"><i class="el-icon-search" @click="doRefresh()"></i>查询</el-button>
                   <el-button size="small "><i @click="onClear()"></i>清空</el-button>
                 </div>
               </div>
@@ -182,8 +182,8 @@
                   <!--操作栏-->
                   <el-table-column align="center" label="操作栏" width="150px" fixed="right">
                     <template slot-scope="scope">
-                      <router-link :to="{path:'/edit',query:{opType:'update',id:scope.row.id}}"><i class="el-icon-edit"></i></router-link>
-                      <i class="el-icon-delete" @click="deleteHostInfo(scope.row)"></i>
+                      <router-link :to="{path:'/hostInfoEdit',query:{opType:'update',id:scope.row.id}}"><i style="margin: 0 10px 0 0" class="el-icon-edit"></i></router-link>
+                      <i class="el-icon-delete"  style="cursor: pointer;margin: 0 0 0 10px" @click="deleteInfo(scope.row)"></i>
                     </template>
                   </el-table-column>
                 </el-table>
@@ -214,7 +214,7 @@
 import homenav from '@/components/homes/homenav'
 import homeaside from '@/components/homes/homeaside'
 import homefooter from '@/components/homes/homefooter'
-import { getListHostInfo,deleteHostInfo } from '@/api/proj/base/hostinfo.js'
+import { getListHostInfo, deleteHostInfo } from '@/api/proj/base/hostinfo.js'
 export default {
   name: 'hostinfo',
   components: {
@@ -253,8 +253,7 @@ export default {
     //获取数据列表
     getList() {
       this.loading = true
-      var dataPost = JSON.stringify(this.queryData)
-      getListHostInfo(dataPost).then(response => {
+      getListHostInfo(this.queryData).then(response => {
         this.loading = false
         this.tableData = response.data.list
         this.queryData.total = response.data.total
@@ -283,7 +282,7 @@ export default {
     },
 
     //删除
-    deleteAudience(row) {
+    deleteInfo(row) {
       this.$confirm(
         ("确定删除该主播信息吗？"),
         ("提示"),
@@ -294,14 +293,7 @@ export default {
           center: true
         }).then(() => {
           if(row.id != null){
-            var url = '/api/hostinfo/delete'
-            this.$axios({
-              method: "post",
-              url: url,
-              data: {
-                id: row.id
-              }
-            }).then(() => {
+            deleteHostInfo(row.id).then(() => {
               this.$notify({
                 title: '删除成功',
                 message: '删除成功',
