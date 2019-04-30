@@ -1,10 +1,12 @@
 package org.huangzi.huangziframe.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.ibatis.annotations.Param;
 import org.huangzi.huangziframe.dto.CastTypeDto;
 import org.huangzi.huangziframe.service.ICastTypeService;
 import org.huangzi.huangziframe.util.BaseResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -82,6 +84,30 @@ public class CastTypeController {
     @ResponseBody
     public Integer update(CastTypeDto castTypeDto){
         return castTypeService.update(castTypeDto);
+    }
+
+    /**
+     * 直播类型logo上传
+     * @param castTypeDto logo的base64值和文件名
+     * @return
+     */
+    @RequestMapping("/upload")
+    public BaseResult uploadImage(@RequestBody CastTypeDto castTypeDto) {
+        BaseResult baseResult = new BaseResult();
+        baseResult.setOssUrl(castTypeService.uploadImage(castTypeDto.getCastLogo(),castTypeDto.getLogoBase()));
+        return baseResult;
+    }
+
+    /**
+     * 从阿里云获取图片链接
+     * @param castTypeDto
+     * @return
+     */
+    @RequestMapping("/geturl")
+    public BaseResult getImageUrl(@RequestBody CastTypeDto castTypeDto) {
+        BaseResult baseResult = new BaseResult();
+        baseResult.setOssUrl(castTypeService.getImageUrl(castTypeDto.getCastLogo()));
+        return baseResult;
     }
 
 }

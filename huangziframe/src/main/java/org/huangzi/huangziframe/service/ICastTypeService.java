@@ -51,4 +51,19 @@ public interface ICastTypeService {
      */
     Integer update(CastTypeDto castTypeDto);
 
+    /**
+     * 直播类型logo上传
+     * @param fileName logo的base64值
+     * @param imageBase logo的文件名
+     * @return
+     */
+    String uploadImage(String fileName,String imageBase);
+
+    /**
+     * 获取图片在阿里云的链接
+     * @param fileName 文件名+.png
+     * @return
+     */
+    String getImageUrl(String fileName);
+
 }

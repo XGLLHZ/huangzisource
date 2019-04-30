@@ -6,6 +6,7 @@ import org.huangzi.huangziframe.entity.CastTypeEntity;
 import org.huangzi.huangziframe.mapper.ICastTypeMapper;
 import org.huangzi.huangziframe.service.ICastTypeService;
 import org.huangzi.huangziframe.util.BeanConverterUtil;
+import org.huangzi.huangziframe.util.OSSUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -86,6 +87,22 @@ public class CastTypeServiceImpl implements ICastTypeService {
         CastTypeEntity castTypeEntitys = new CastTypeEntity();
         CastTypeEntity castTypeEntity = BeanConverterUtil.beanConvert(castTypeEntitys,castTypeDto);
         return castTypeMapper.updateById(castTypeEntity);
+    }
+
+    /**
+     * 直播类型logo上传
+     * @param fileName logo的base64值
+     * @param imageBase logo的文件名
+     * @return
+     */
+    @Override
+    public String uploadImage(String fileName,String imageBase) {
+        return OSSUtil.uploadImageToOSS(fileName,imageBase);
+    }
+
+    @Override
+    public String getImageUrl(String fileName) {
+        return OSSUtil.getImageUrl(fileName + ".png");
     }
 
 }

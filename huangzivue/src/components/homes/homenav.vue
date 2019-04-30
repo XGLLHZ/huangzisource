@@ -57,7 +57,10 @@
                 <div><span>皇子带主播！</span></div>
                 <div v-show="sysmanage">
                   <el-menu>
-                    <el-submenu index="1">
+                    <el-menu-item index="1" @click="goPath('/personcenter')">
+                      <template slot="title">个人中心</template>
+                    </el-menu-item>
+                    <el-submenu index="2">
                       <template slot="title">系统管理</template>
                       <el-menu-item v-for="(item,index) in this.routes"
                                     :index="index+1"

@@ -6,12 +6,19 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import store from './store'
+import VueVideoPlayer from 'vue-video-player'
+import 'video.js/dist/video-js.css' // 引入样式
+import 'vue-video-player/src/custom-theme.css' // 引入样式
+import 'videojs-flash'
+import barrage from "vue2-barrage"
 import { initMenu } from './utils/menu'
 //import axios from 'axios'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/index.scss'
 
-Vue.use(ElementUI);
+Vue.use(ElementUI)
+Vue.use(VueVideoPlayer)
+Vue.use(barrage)
 //Vue.prototype.$axios = axios   //在vue中使用axios
 
 Vue.config.productionTip = false
@@ -24,6 +31,12 @@ new Vue({
   components: { App },   //项目加载第二步：注册组件
   template: '<App/>'   //设置要挂载的元素，即vue文件中的template将被html的形式加入到html文件中
 })
+
+// VueVideoPlayer.config({
+//   youtube: true, // default false
+//   switcher: false, // default true
+//   hls: false // default true
+//   })
 
 // vue项目启动时的文件加载顺序
 // 1、确定将被挂载（替换）的元素，此处为index.html中的<div id="app"><div>

@@ -1,9 +1,11 @@
 import routeNav from './routeNav'
 import routeBase from './routeBase'
+import routeProj from './routeProj'
 
 const projRoutes = [
     ...routeNav,
-    ...routeBase
+    ...routeBase,
+    ...routeProj
 ]
 
 export default projRoutes

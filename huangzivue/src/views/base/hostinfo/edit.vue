@@ -202,7 +202,7 @@ export default {
                 type: 'success',
                 position: 'bottom-right'
               });
-            this.$router.go(-1)
+            this.$router.push('/liveset')
             }).catch(() => {
               this.$notify({
                 title: '保存失败',

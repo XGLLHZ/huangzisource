@@ -29,6 +29,11 @@ public class CastTypeDto extends BaseDto {
     private String castLogo;
 
     /**
+     * 直播种类logobase64值
+     */
+    private String logoBase;
+
+    /**
      * 逻辑删除状态：0：可用；1：已删除
      */
     private int deleteFlag;

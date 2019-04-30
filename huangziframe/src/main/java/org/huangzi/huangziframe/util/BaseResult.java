@@ -34,5 +34,10 @@ public class BaseResult {
      */
     public List list;
 
+    /**
+     * 阿里云对象存储链接
+     */
+    public String ossUrl;
+
 }
 
