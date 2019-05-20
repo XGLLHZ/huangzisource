@@ -23,7 +23,6 @@ public class HostInfoController {
 
     @Autowired
     IHostInfoService hostInfoService;
-
     /**
      * 获取主播信息列表
      * @param hostInfoDto 查询参数

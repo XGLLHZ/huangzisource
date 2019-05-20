@@ -89,9 +89,9 @@
 </template>
 
 <script>
-import homenav from '@/components/homes/homenav'
-import homeaside from '@/components/homes/homeaside'
-import homefooter from '@/components/homes/homefooter'
+import homenav from '@/components/homenav'
+import homeaside from '@/components/homeaside'
+import homefooter from '@/components/homefooter'
 import { addAudience, getByIdAudience, updateAudience } from '@/api/proj/base/audience.js'
 export default {
   name: 'audienceEdit',

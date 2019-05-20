@@ -2,7 +2,7 @@
   <div class="nav">
     <div class="navbar">
       <div class="leftbar">
-        <router-link to="/" style="float:left"><img src="../../assets/logo.png" style="height:56px"/></router-link>
+        <router-link to="/" style="float:left"><img src="./../assets/logo.png" style="height:56px"/></router-link>
         <ul>
           <li><router-link to="/">首页</router-link></li>
           <li><router-link to="/alllive">全部</router-link></li>
@@ -69,7 +69,7 @@
                   </el-menu>
                 </div>
                 <div class="logout"><span @click="logout()">退出</span></div>
-                <span slot="reference">我</span>
+                <span slot="reference">{{this.userInfo.userName}}</span>
               </el-popover>
             </li>
           </ul>

@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
  * @description:
  */
 @RestController
-@RequestMapping
+@RequestMapping("/test")
 public class HelloController {
 
     @RequestMapping("/hello")
     public String hello(){
-        return "hello-------------妈了和皮耶！";
+        System.out.println("真的难受啊！");
+        return "难受啊！hello-------------妈了和皮耶！";
     }
 
     @RequestMapping("/admin/hello")

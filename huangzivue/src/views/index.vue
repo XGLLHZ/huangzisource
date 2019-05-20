@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import homenav from '@/components/homes/homenav'
-import homemain1 from '@/components/homes/homemain1'
-import homefooter from '@/components/homes/homefooter'
+import homenav from '@/components/homenav'
+import homemain1 from '@/components/homemain1'
+import homefooter from '@/components/homefooter'
 export default {
   name: 'index',
   components: {

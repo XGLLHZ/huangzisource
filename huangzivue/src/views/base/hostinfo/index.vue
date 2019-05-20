@@ -211,9 +211,9 @@
 </template>
 
 <script>
-import homenav from '@/components/homes/homenav'
-import homeaside from '@/components/homes/homeaside'
-import homefooter from '@/components/homes/homefooter'
+import homenav from '@/components/homenav'
+import homeaside from '@/components/homeaside'
+import homefooter from '@/components/homefooter'
 import { getListHostInfo, deleteHostInfo } from '@/api/proj/base/hostinfo.js'
 export default {
   name: 'hostinfo',

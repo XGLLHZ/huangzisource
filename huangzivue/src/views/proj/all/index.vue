@@ -21,12 +21,12 @@
                 </div>
                 <div class="host-title-other">
                   <div class="host-title-midle">
-                    <span>35</span><span>LOL、摇摆哥</span><span>私信主播</span><span>热度192500</span><span>皇子星火</span>
+                    <span>1</span><span>国服第一劫</span><span>私信主播</span><span>热度192500</span><span>皇子星火</span>
                   </div>
                 </div>
                 <div class="host-title-other">
                   <div class="host-title-span">
-                    <el-button size="mini" style="width:150px" round><span>国服第一小鱼人</span></el-button>
+                    <el-button size="mini" style="width:150px" round><span>无形之刃 最为致命</span></el-button>
                   </div>
                 </div>
               </div>
@@ -44,7 +44,7 @@
                 <div class="barrage-list" v-for="(item, key) in barragelist">
                   <el-row>
                     <el-col>
-                      <span class="barrage-list-user">人世间子：</span><span class="barrage-list-content">{{item}}</span>
+                      <span class="barrage-list-user">admin：</span><span class="barrage-list-content">{{item}}</span>
                     </el-col>
                   </el-row>
                 </div>
@@ -73,9 +73,9 @@
 </template>
 
 <script>
-import homenav from '@/components/homes/homenav'
-import homeaside from '@/components/homes/homeaside'
-import homefooter from '@/components/homes/homefooter'
+import homenav from '@/components/homenav'
+import homeaside from '@/components/homeaside'
+import homefooter from '@/components/homefooter'
 import 'video.js/dist/video-js.css'
 import {videoPlayer} from 'vue-video-player'
 import 'videojs-flash'

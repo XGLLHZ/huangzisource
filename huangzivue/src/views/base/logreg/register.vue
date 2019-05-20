@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import homenav from '@/components/homes/homenav'
-import homefooter from '@/components/homes/homefooter'
+import homenav from '@/components/homenav'
+import homefooter from '@/components/homefooter'
 import { registerApi } from '@/api/proj/base/navbar.js'
 export default {
   name: 'register',
