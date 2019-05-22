@@ -12,9 +12,9 @@
                 </el-carousel-item>
             </el-carousel>
           </div>
-          <div class="main-top">
-            <div class="main-topt">
-              <span style="font-size:28px;color:#555555">英雄联盟</span>
+          <div class="main-topv">
+            <div class="main-toptv">
+              <span class="xiangqing" style="font-size:28px;color:#555555">英雄联盟</span>
               <span><el-button size="mini" round><span>全部</span></el-button></span>
               <span><el-button size="mini" round><span>网游竞技</span></el-button></span>
               <span><el-button size="mini" round><span>单机热游</span></el-button></span>
@@ -84,26 +84,25 @@ export default {
   padding: 20px 0 0 0;
   width: 100%;
 }
-.main-top {
+.main-topv {
   margin: 0;
   padding: 0;
   line-height: 2;
 }
-.main-topt {
+.main-toptv {
   margin: 0;
   padding: 0;
   width: 45%;
 }
-.main-top span {
+.xiangqing span {
   vertical-align: middle;
 }
-.main-top span button {
+.xiangqing span button {
   vertical-align: middle;
 }
 .main-midle {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 600px;
 }
 </style>

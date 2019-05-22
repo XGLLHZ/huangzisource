@@ -13,15 +13,19 @@
                 </div>
                 <div class="host-title">
                   <div class="title-name" style="float:left;line-height:35px">
-                    <span style="font-size:20px;font-weight: bold">冲分：剑指韩服王者</span>  
+                    <span style="font-size:20px;font-weight: bold">{{this.liveinfo.hostTitle}}</span>  
                   </div>
                   <div class="title-total" style="float:right;line-height:30px">
-                    <el-button size="small" round style="width:130px"><span>关注 | 187320</span></el-button>
+                    <el-button size="small" round style="width:130px"><span>关注 | {{liveinfo.hostFansCount}}</span></el-button>
                   </div> 
                 </div>
                 <div class="host-title-other">
                   <div class="host-title-midle">
-                    <span>1</span><span>国服第一劫</span><span>私信主播</span><span>热度192500</span><span>皇子星火</span>
+                    <span>Lv.30</span>
+                    <span>{{liveinfo.hostNickname}}</span>
+                    <span>私信主播</span>
+                    <span>皇子星火</span>
+                    <span>{{liveinfo.hostFansCount}}人</span>
                   </div>
                 </div>
                 <div class="host-title-other">
@@ -33,7 +37,8 @@
               <div class="live-live">
                 <div class="video-box">
                   <div>
-                    <videoPlayer class="vjs-custom-skin videoPlayer" :options="playerOptions"></videoPlayer>
+                    <videoPlayer v-show="videoplayshow" class="vjs-custom-skin videoPlayer" :options="playerOptions"></videoPlayer>
+                    <img v-show="hostnoneshow" style="width:100%" src="../../../assets/indexpng/host-none.jpg">
                   </div>
                 </div>
               </div>
@@ -44,7 +49,7 @@
                 <div class="barrage-list" v-for="(item, key) in barragelist">
                   <el-row>
                     <el-col>
-                      <span class="barrage-list-user">admin：</span><span class="barrage-list-content">{{item}}</span>
+                      <span class="barrage-list-user">{{liveinfo.hostNickname}}：</span><span class="barrage-list-content">{{item}}</span>
                     </el-col>
                   </el-row>
                 </div>
@@ -57,7 +62,7 @@
             </div>
           </div>
         </div>
-        <div class="main-discuss">
+        <!--<div class="main-discuss">
           <div class="main-discuss-info">
             <div class="discuss-info">
               <div class="discuss-guessing"></div>
@@ -65,8 +70,8 @@
             </div>
             <div class="discuss-host-neighbor"></div>
           </div>
-        </div>
-        <homefooter></homefooter>
+        </div>-->
+        <!--<homefooter></homefooter>-->
       </div>
     </div>
   </div>
@@ -76,11 +81,12 @@
 import homenav from '@/components/homenav'
 import homeaside from '@/components/homeaside'
 import homefooter from '@/components/homefooter'
+import { getByIdHostInfo } from '@/api/proj/yewu/index.js'
 import 'video.js/dist/video-js.css'
 import {videoPlayer} from 'vue-video-player'
 import 'videojs-flash'
 export default {
-  name: 'alllive',
+  name: 'hostlive',
   components: {
     homenav,
     homeaside,
@@ -89,31 +95,69 @@ export default {
   },
   data() {
     return {
+      liveinfo: {
+        id: '',
+        hostRoom: '',
+        hostNickname: '',
+        hostTitle: '',
+        hostFlag: '',
+        hostFansCount: '',
+        hostType: '',
+        hostLiuname: '',
+        liuUrl: ''
+      },
+      videoplayshow: true,
+      hostnoneshow:false,
+      srcUrl: '',
+      loading: false,
+      barragelist: [],
+      barragetext: '',
       playerOptions: {
 			sources: [{
 				type: 'rtmp/mp4',
-        src: 'rtmp://119.23.234.176:1935/live/my',
+        src: '',
         withCredentials: false
-			}],
+      }],
+      poster : '', 
 			height: '487',
 			techOrder: ['flash'],
 			autoplay: true,
       controls: true,
       language: 'zh-CN',
       live: true
-      },
-      loading: false,
-      barragelist: [],
-      barragetext: ''
+      }
 		}
   },
 
-  mounted(){
-      this.$refs.input.focus()
-      this.send = this.$start(document.querySelector('.videoPlayer', [0,0.2]))
+  //这个方法先执行(通常是初始化页面某些属性值)
+  created() {
+    this.getLiveInfo()
+  },
+
+  //这个方法后执行(通常初始化dom节点内容，比如echar图这种)
+  mounted() {
+    this.$refs.input.focus()
+    this.send = this.$start(document.querySelector('.videoPlayer', [0,0.2]))
   },
 
   methods: {
+
+    getLiveInfo() {
+      var hostId = this.$route.query.hostid
+      this.loading = true
+      getByIdHostInfo(hostId).then(response => {
+        this.loading = false
+        this.liveinfo = response.data
+        this.playerOptions.sources[0].src = this.liveinfo.liuUrl + this.liveinfo.hostLiuname
+        if (this.liveinfo.hostFlag === 0) {
+          this.videoplayshow = false
+          this.hostnoneshow = true
+        }
+      }).catch(() => {
+        this.loading = false
+      })
+    },
+
     sendBarrage() {
       this.barragelist.push(this.barragetext)
       this.barragetext = ''
@@ -121,9 +165,8 @@ export default {
         text: this.barragelist
       })
     }
+
   }
-  //LTAIuyM8p0B3hCZe
-  //GxjhCWuK0LfOsGeCP640AMbu5Hf8HB
 }
 </script>
 

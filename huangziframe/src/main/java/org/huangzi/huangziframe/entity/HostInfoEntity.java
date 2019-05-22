@@ -48,6 +48,12 @@ public class HostInfoEntity {
     private String hostTitle;
 
     /**
+     * 直播流名称
+     */
+    @TableField("HOST_LIUNAME")
+    private String hostLiuname;
+
+    /**
      * 主播姓名
      */
     @TableField("HOST_NAME")

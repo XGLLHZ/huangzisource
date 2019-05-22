@@ -14,6 +14,16 @@ const routeProj = [
         meta: {
             requireAuth: true
         }
+    },
+    {
+        path: '/hostlive',
+        name: 'hostlive',
+        component: ()=>import('@/views/proj/alllive/hostlive')
+    },
+    {
+        path: '/castkind',
+        name: 'castkind',
+        component: ()=>import('@/views/proj/kind/castkind')
     }
 ]
 

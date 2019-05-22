@@ -24,21 +24,6 @@ public class HostInfoDto extends BaseDto {
     private String hostRoom;
 
     /**
-     * 直播类别：外键-直播种类表id
-     */
-    private int hostType;
-
-    /**
-     * 直播状态：0：休息；1：直播；2：被安排
-     */
-    private int hostFlag;
-
-    /**
-     * 直播标题
-     */
-    private String hostTitle;
-
-    /**
      * 主播姓名
      */
     private String hostName;
@@ -54,9 +39,14 @@ public class HostInfoDto extends BaseDto {
     private String hostAccount;
 
     /**
-     * 主播头像
+     * 主播头像名称
      */
     private String hostLogo;
+
+    /**
+     * 主播头像地址
+     */
+    private String hostLogoUrl;
 
     /**
      * 主播性别
@@ -87,6 +77,41 @@ public class HostInfoDto extends BaseDto {
      * 主播地址
      */
     private String hostLoc;
+
+    /**
+     * 主播粉丝数量
+     */
+    private int hostFansCount;
+
+    /**
+     * 直播类别：外键-直播种类表id
+     */
+    private int hostType;
+
+    /**
+     * 直播状态：0：休息；1：直播；2：被安排
+     */
+    private int hostFlag;
+
+    /**
+     * 直播标题
+     */
+    private String hostTitle;
+
+    /**
+     * 直播头像地址
+     */
+    private String liveLogoUrl;
+
+    /**
+     * 直播流名称
+     */
+    private String hostLiuname;
+
+    /**
+     * 直播流地址
+     */
+    private String liuUrl;
 
     /**
      * 逻辑删除状态：0：可用；1：已删除

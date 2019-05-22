@@ -37,7 +37,7 @@ export default {
       playerOptions: {
         sources: [{
         type: 'rtmp/mp4',
-        src: 'rtmp://119.23.234.176:1935/live/my',
+        src: 'rtmp://119.23.234.176:1935/live/huangzi',
         withCredentials: false
             }],
             height: '525',

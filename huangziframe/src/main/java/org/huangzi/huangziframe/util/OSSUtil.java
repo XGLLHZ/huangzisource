@@ -7,6 +7,7 @@ import sun.misc.BASE64Decoder;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -21,7 +22,7 @@ public class OSSUtil {
     public final static String accessKeyId = "LTAIuyM8p0B3hCZe";   //AccessKeyId id
     public final static String accessKeySecret = "GxjhCWuK0LfOsGeCP640AMbu5Hf8HB";   //accessKeySecret 密码
     public final static String bucket = "huangzisource";   //上传的bucket名
-    public final static String fileDir = "huangzi/castlogo/";   //图片保存路径
+    public final static String fileDir = "huangzi/";   //图片保存基路径
 
     /**
      * 上传图片值阿里云OSS对象存储
@@ -47,7 +48,7 @@ public class OSSUtil {
                 ObjectMetadata objectMetadata = new ObjectMetadata();
                 objectMetadata.setContentLength(inputStream.available());
                 ossClient.putObject(OSSUtil.bucket,fileDir+imageName,inputStream,objectMetadata);
-                viewImageUrl = OSSUtil.getImageUrl(imageName);
+                viewImageUrl = OSSUtil.getImageUrl(imageName,"castlog/");
                 ossClient.shutdown();
                 return viewImageUrl;
             } catch (IOException e) {
@@ -60,14 +61,14 @@ public class OSSUtil {
     }
 
     /**
-     * 从阿里云获取图片链接
+     * 获取图片链接
      * @param imageName 图片名称
      * @return
      */
-    public static String getImageUrl(String imageName) {
+    public static String getImageUrl(String imageName,String fileItemDir) {
         OSSClient ossClient = new OSSClient(OSSUtil.endPoint,OSSUtil.accessKeyId,OSSUtil.accessKeySecret);
         Date expiration = new Date(new Date().getTime() + 3600l * 1000 * 24 * 365 * 10);   //这个好像是有效期
-        String url = ossClient.generatePresignedUrl(OSSUtil.bucket,fileDir + imageName,expiration).toString();
+        String url = ossClient.generatePresignedUrl(OSSUtil.bucket,fileDir + fileItemDir + imageName,expiration).toString();
         return url;
     }
 
@@ -76,11 +77,11 @@ public class OSSUtil {
      * @param imageType 图片类型
      * @return
      */
-    /*public static String generateImageName(String imageType) {
+    public static String generateImageName(String imageType) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String imageDate = simpleDateFormat.format(new Date());
         String imageName = imageDate + "." + imageType;
         return imageName;
-    }*/
+    }
 
 }

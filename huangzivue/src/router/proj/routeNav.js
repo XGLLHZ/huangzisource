@@ -2,7 +2,7 @@ const routeNav = [
     {
         path: '/alllive',
         name: 'alllive',
-        component: ()=>import('@/views/proj/all/index')
+        component: ()=>import('@/views/proj/alllive/index')
     },
     {
         path: '/kind',

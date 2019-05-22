@@ -10,6 +10,7 @@ import org.huangzi.huangziframe.util.OSSUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -102,7 +103,7 @@ public class CastTypeServiceImpl implements ICastTypeService {
 
     @Override
     public String getImageUrl(String fileName) {
-        return OSSUtil.getImageUrl(fileName + ".png");
+        return OSSUtil.getImageUrl(fileName,"castlogo/");
     }
 
 }

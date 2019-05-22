@@ -2,10 +2,10 @@
 import request from '@/utils/request'
 
 //列表
-export function getListHostInfo(params) {
+export function getListCastType(params) {
     return request({
         method: 'post',
-        url: '/api/hostinfo/list',
+        url: '/api/casttype/list',
         data: params
     })
 }

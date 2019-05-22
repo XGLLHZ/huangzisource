@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.huangzi.huangziframe.mapper.INavInfoMapper">
+
+    <!--获取全部直播页面列表信息-->
+    <select id="getAllLiveList" resultType="org.huangzi.huangziframe.dto.HostInfoDto">
+        SELECT
+        hostInfo.ID,
+        hostInfo.HOST_ROOM,
+        hostInfo.HOST_TYPE,
+        hostInfo.HOST_FLAG,
+        hostInfo.HOST_TITLE,
+        hostInfo.HOST_NICKNAME,
+        hostInfo.HOST_GENDER,
+        hostInfo.HOST_LOGO
+        FROM HOST_INFO hostInfo
+        WHERE hostInfo.DELETE_FLAG = '0'
+
+        <if test="condition != null">
+            <if test="condition.hostRoom !=null and condition.hostRoom != ''">
+                <bind name="hostRoom" value="condition.hostRoom+'%'"/>
+                AND hostInfo.HOST_ROOM LIKE #{hostRoom}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostType !=null and condition.hostType != ''">
+                <bind name="hostType" value="condition.hostType+'%'"/>
+                AND hostInfo.HOST_TYPE LIKE #{hostType}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostFlag !=null and condition.hostFlag != ''">
+                <bind name="hostFlag" value="condition.hostFlag+'%'"/>
+                AND hostInfo.HOST_FLAG LIKE #{hostFlag}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostName !=null and condition.hostName != ''">
+                <bind name="hostName" value="condition.hostName+'%'"/>
+                AND hostInfo.HOST_NAME LIKE #{hostName}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostNickname !=null and condition.hostNickname != ''">
+                <bind name="hostNickname" value="condition.hostNickname+'%'"/>
+                AND hostInfo.HOST_NICKNAME LIKE #{hostNickname}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostGender !=null and condition.hostGender != ''">
+                <bind name="hostGender" value="condition.hostGender+'%'"/>
+                AND hostInfo.HOST_GENDER LIKE #{hostGender}
+            </if>
+        </if>
+    </select>
+
+    <!--获取主播粉丝数量-->
+    <select id="getHostFansCount" resultType="int">
+        SELECT
+        COUNT(hostFans.ID)
+        FROM HOST_FANS hostFans
+        WHERE hostFans.HOST_ID = #{condition}
+        AND hostFans.DELETE_FLAG = '0'
+    </select>
+
+    <!--获取主播信息和直播信息-->
+    <select id="getHostInfoAndLiveInfo" resultType="org.huangzi.huangziframe.dto.HostInfoDto">
+        SELECT
+        hostInfo.ID,
+        hostInfo.HOST_ROOM,
+        hostInfo.HOST_TYPE,
+        hostInfo.HOST_FLAG,
+        hostInfo.HOST_TITLE,
+        hostInfo.HOST_NICKNAME,
+        hostInfo.HOST_GENDER,
+        hostInfo.HOST_LOGO,
+        hostInfo.HOST_LIUNAME
+        FROM HOST_INFO hostInfo
+        WHERE hostInfo.ID = #{condition}
+        AND hostInfo.DELETE_FLAG = '0'
+    </select>
+
+    <!--获取直播分类页面信息列表-->
+    <select id="getKindList" resultType="org.huangzi.huangziframe.dto.CastTypeDto">
+        SELECT
+        castType.ID,
+        castType.CAST_NAME,
+        castType.CAST_LOGO
+        FROM CAST_TYPE castType
+        WHERE castType.DELETE_FLAG = '0'
+    </select>
+
+    <!--获取单个种类信息信息-->
+    <select id="getCastType" resultType="org.huangzi.huangziframe.dto.CastTypeDto">
+        SELECT
+        castType.ID,
+        castType.CAST_NAME,
+        castType.CAST_LOGO
+        FROM CAST_TYPE castType
+        WHERE castType.ID =  #{condition}
+        AND castType.DELETE_FLAG = '0'
+    </select>
+
+    <!--根据直播类别获取主播信息和直播信息列表-->
+    <select id="getLiveListByCastType" resultType="org.huangzi.huangziframe.dto.HostInfoDto">
+        SELECT
+        hostInfo.ID,
+        hostInfo.HOST_ROOM,
+        hostInfo.HOST_TYPE,
+        hostInfo.HOST_FLAG,
+        hostInfo.HOST_TITLE,
+        hostInfo.HOST_NICKNAME,
+        hostInfo.HOST_GENDER,
+        hostInfo.HOST_LOGO
+        FROM HOST_INFO hostInfo,CAST_TYPE castType
+        WHERE hostInfo.HOST_TYPE = castType.ID
+        AND castType.ID = #{condition.id}
+        AND hostInfo.DELETE_FLAG = '0'
+
+        <if test="condition != null">
+            <if test="condition.hostRoom !=null and condition.hostRoom != ''">
+                <bind name="hostRoom" value="condition.hostRoom+'%'"/>
+                AND hostInfo.HOST_ROOM LIKE #{hostRoom}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostType !=null and condition.hostType != ''">
+                <bind name="hostType" value="condition.hostType+'%'"/>
+                AND hostInfo.HOST_TYPE LIKE #{hostType}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostFlag !=null and condition.hostFlag != ''">
+                <bind name="hostFlag" value="condition.hostFlag+'%'"/>
+                AND hostInfo.HOST_FLAG LIKE #{hostFlag}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostName !=null and condition.hostName != ''">
+                <bind name="hostName" value="condition.hostName+'%'"/>
+                AND hostInfo.HOST_NAME LIKE #{hostName}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostNickname !=null and condition.hostNickname != ''">
+                <bind name="hostNickname" value="condition.hostNickname+'%'"/>
+                AND hostInfo.HOST_NICKNAME LIKE #{hostNickname}
+            </if>
+        </if>
+
+        <if test="condition != null">
+            <if test="condition.hostGender !=null and condition.hostGender != ''">
+                <bind name="hostGender" value="condition.hostGender+'%'"/>
+                AND hostInfo.HOST_GENDER LIKE #{hostGender}
+            </if>
+        </if>
+    </select>
+
+</mapper>
+
+
