@@ -14,7 +14,7 @@
           </div>
           <div class="main-topv">
             <div class="main-toptv">
-              <span class="xiangqing" style="font-size:28px;color:#555555">英雄联盟</span>
+              <span class="xiangqing" style="font-size:28px;color:#555555">皇子视频</span>
               <span><el-button size="mini" round><span>全部</span></el-button></span>
               <span><el-button size="mini" round><span>网游竞技</span></el-button></span>
               <span><el-button size="mini" round><span>单机热游</span></el-button></span>
@@ -22,9 +22,13 @@
               <span><el-button size="mini" round><span>手游休闲</span></el-button></span>
             </div>
           </div>
-          <div class="main-midle"></div>
+          <div class="main-midle">
+            <div class="main-video">
+              <videoPlayer class="vjs-custom-skin videoPlayer" :options="playerOptions"></videoPlayer>
+              <div>国服第一劫 极限五杀</div>
+            </div>
+          </div>
         </div>
-        <homefooter></homefooter>
       </div>
     </div>
   </div>
@@ -34,12 +38,16 @@
 import homenav from '@/components/homenav'
 import homeaside from '@/components/homeaside'
 import homefooter from '@/components/homefooter'
+import 'video.js/dist/video-js.css'
+import {videoPlayer} from 'vue-video-player'
+import 'videojs-flash'
 export default {
   name: 'alllive',
   components: {
     homenav,
     homeaside,
-    homefooter
+    homefooter,
+    videoPlayer
   },
   data() {
       return {
@@ -50,7 +58,20 @@ export default {
               {id:3,imgsrc: require('../../../assets/indexpng/4.png')},
               {id:4,imgsrc: require('../../../assets/indexpng/5.png')},
               {id:5,imgsrc: require('../../../assets/indexpng/6.png')}
-          ]
+          ],
+          playerOptions: {
+            sources: [{
+            type: 'rtmp/mp4',
+            src: '../../../assets/逃逸.mp4',
+            withCredentials: false
+                }],
+                height: '200',
+                techOrder: ['flash'],
+                autoplay: true,
+            controls: true,
+            language: 'zh-CN',
+            live: true
+        }
       }
   }
 }
@@ -104,5 +125,13 @@ export default {
   margin: 0;
   padding: 0;
   width: 100%;
+}
+.main-video {
+  margin: 0;
+  padding: 0;
+  width: 25%;
+  height: 230px;
+  background-color: white;
+  border: 1px solid #F4F5F8
 }
 </style>

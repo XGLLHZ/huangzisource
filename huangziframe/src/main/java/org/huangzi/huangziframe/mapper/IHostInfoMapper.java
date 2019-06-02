@@ -36,4 +36,11 @@ public interface IHostInfoMapper extends BaseMapper<HostInfoEntity> {
      */
     HostInfoDto getById(int id);
 
+    /**
+     * 根据主播账号查询主播信息
+     * @param hostAccount
+     * @return
+     */
+    HostInfoDto getByName(@Param("condition") String hostAccount);
+
 }

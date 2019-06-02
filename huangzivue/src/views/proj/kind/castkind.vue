@@ -5,6 +5,13 @@
       <homeaside style="float:left"></homeaside>
       <div class="main">
         <div class="maint">
+          <div class="main-photo">
+              <el-carousel :interval="3000" type="card" height="200px">
+                <el-carousel-item v-for="item in imglist" :key="item.id" style="border-radius: 5px;">
+                <el-col><img ref="imgHeight" :src="item.imgsrc"/></el-col>
+                </el-carousel-item>
+            </el-carousel>
+          </div>
           <div class="main-top">
             <div class="main-topt">
               <span style="font-size:28px;color:#555555">{{casttype.castName}}</span>
@@ -56,6 +63,14 @@ export default {
   },
   data() {
     return {
+      imglist: [
+          {id:0,imgsrc: require('../../../assets/indexpng/1.png')},
+          {id:1,imgsrc: require('../../../assets/indexpng/2.png')},
+          {id:2,imgsrc: require('../../../assets/indexpng/3.png')},
+          {id:3,imgsrc: require('../../../assets/indexpng/4.png')},
+          {id:4,imgsrc: require('../../../assets/indexpng/5.png')},
+          {id:5,imgsrc: require('../../../assets/indexpng/6.png')}
+      ],
       queryData: {
         id: '',
         hostRoom: '',

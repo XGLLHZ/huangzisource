@@ -21,7 +21,7 @@ public class UserInfoDto extends BaseDto {
     private int id;
 
     /**
-     * 用户用户名
+     * 用户名
      */
     private String userName;
 
@@ -29,6 +29,24 @@ public class UserInfoDto extends BaseDto {
      * 用户密码
      */
     private String userPassword;
+
+    //真实姓名
+    private String userZSName;
+
+    //昵称
+    private String nickName;
+
+    //年龄（出生年月）
+    private String age;
+
+    //身份证号
+    private String idNum;
+
+    //电话
+    private String phone;
+
+    //地址
+    private String loc;
 
     /**
      * 用户类型：1：超管；2：主播；3：房管；4：观众

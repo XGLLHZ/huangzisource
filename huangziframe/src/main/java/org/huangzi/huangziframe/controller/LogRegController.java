@@ -53,4 +53,31 @@ public class LogRegController {
         return userInfoService.list(id);
     }
 
+    /**
+     * 根据用户类型和用户id查询用户信息（个人中心页面显示）
+     * @param userInfoDto
+     * @return
+     */
+    @RequestMapping("/getinfo")
+    public UserInfoDto getInfo(@RequestBody UserInfoDto userInfoDto) {
+        return userInfoService.getInfo(userInfoDto.getUserType(),userInfoDto.getUserName());
+    }
+
+    /**
+     * 修改密码
+     * @param userInfoDto
+     * @return
+     */
+    @RequestMapping("/updatepassword")
+    public Integer updatePassWord(@RequestBody UserInfoDto userInfoDto) {
+        return userInfoService.updatePassWord(userInfoDto);
+    }
+
 }
+
+/**
+ * 这一路上走走停停顺着少年漂流的痕迹
+ * 不去想着尽享情节reng
+ */
+
+

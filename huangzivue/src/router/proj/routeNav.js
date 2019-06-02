@@ -23,6 +23,11 @@ const routeNav = [
         path: '/register',
         name: 'register',
         component: ()=>import('@/views/base/logreg/register')
+    },
+    {
+        path: '/updatepassword',
+        name: 'updatepassword',
+        component: ()=>import('@/views/proj/personcenter/updatepassword')
     }
 ]
 

@@ -23,6 +23,7 @@
               <div class="hostset-main">
                 <person v-if="personvisible"></person>
                 <liveset v-if="livesetdisible"></liveset>
+                <updatepassword v-if="updatepassworddisible"></updatepassword>
               </div>
             </div>
           </div> 
@@ -39,6 +40,7 @@ import homeaside from '@/components/homeaside'
 import homefooter from '@/components/homefooter'
 import person from '@/views/proj/personcenter/person'
 import liveset from '@/views/proj/personcenter/liveset'
+import updatepassword from '@/views/proj/personcenter/updatepassword'
 export default {
   name: 'personcenter',
   components: {
@@ -46,7 +48,8 @@ export default {
     homeaside,
     homefooter,
     person,
-    liveset
+    liveset,
+    updatepassword
   },
   data() {
     return {

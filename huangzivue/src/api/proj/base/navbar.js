@@ -19,7 +19,31 @@ export function registerApi(params) {
     })
 }
 
-//获取资源
+//个人中心
+export function getInfo(params1,params2) {
+    return request({
+        method: 'post',
+        url: '/api/userinfo/getinfo',
+        data: {
+            userName: params1,
+            userType: params2
+        }
+    })
+}
+
+//修改密码
+export function updatePassWord(params1,params2) {
+    return request({
+        method: 'post',
+        url: 'api/userinfo/updatepassword',
+        data: {
+            id: params1,
+            userPassword: params2
+        }
+    })
+}
+
+//获取资源（菜单权限）
 export function getMenuApi(params) {
     return request({
         method: 'post',

@@ -114,17 +114,17 @@ export default {
       barragetext: '',
       playerOptions: {
 			sources: [{
-				type: 'rtmp/mp4',
-        src: '',
-        withCredentials: false
-      }],
-      poster : '', 
-			height: '487',
-			techOrder: ['flash'],
-			autoplay: true,
-      controls: true,
-      language: 'zh-CN',
-      live: true
+          type: 'rtmp/mp4',
+          src: '',
+          withCredentials: false
+        }],
+        poster : '', 
+        height: '487',
+        techOrder: ['flash'],
+        autoplay: true,
+        controls: true,
+        language: 'zh-CN',
+        live: true
       }
 		}
   },

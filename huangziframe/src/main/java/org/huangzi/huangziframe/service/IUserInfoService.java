@@ -33,4 +33,19 @@ public interface IUserInfoService {
      */
     List<MenuInfoDto> list(int id);
 
+    /**
+     * 通过用户类型查询用户信息（个人中心页面展示）
+     * @param userType
+     * @param account
+     * @return
+     */
+    UserInfoDto getInfo(int userType,String account);
+
+    /**
+     * 修改密码
+     * @param userInfoDto
+     * @return
+     */
+    Integer updatePassWord(UserInfoDto userInfoDto);
+
 }

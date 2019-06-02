@@ -12,6 +12,7 @@ import java.util.*;
  * @Author guohao
  */
 public class BeanConverterUtil {
+
     /**
      * entity与dto的转换方法
      * @param entity entity
