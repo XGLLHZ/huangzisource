@@ -24,5 +24,9 @@ huangzivue：前台
 ![皇子直播-分类页](https://github.com/XGLLHZ/huangzisource/blob/master/huangzivue/static/%E5%88%86%E7%B1%BB.png)
 
 
+皇子直播-主播页
+![皇子直播-主播页](https://github.com/XGLLHZ/huangzisource/blob/master/huangzivue/static/%E4%B8%BB%E6%92%AD%E9%A1%B5.png)
+
+
 皇子直播-后台管理页
 ![皇子直播-后台管理页](https://github.com/XGLLHZ/huangzisource/blob/master/huangzivue/static/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E9%A6%96%E9%A1%B5.png)
