@@ -18,3 +18,7 @@ huangzivue：前台
 
 皇子直播-全部直播页
 ![皇子直播-全部直播页](https://github.com/XGLLHZ/huangzisource/blob/master/huangzivue/static/%E5%85%A8%E9%83%A8.png)
+
+
+皇子直播-分类页
+![皇子直播-分类页](https://github.com/XGLLHZ/huangzisource/blob/master/huangzivue/static/%E5%88%86%E7%B1%BB.png)
