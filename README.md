@@ -9,3 +9,5 @@ huangzivue：前台
 这首歌   就当是葬礼！！！
 
 ![皇子直播-首页](https://github.com/XGLLHZ/huangzisource/blob/master/huangzivue/static/%E9%A6%96%E9%A1%B5.png)
+
+![皇子直播-全部直播页](https://github.com/XGLLHZ/huangzisource/blob/master/huangzivue/static/%E5%85%A8%E9%83%A8.png)
