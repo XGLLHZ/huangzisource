@@ -113,4 +113,26 @@
         AND hostInfo.DELETE_FLAG = '0'
     </select>
 
+    <!--通过主播姓名获取主播信息-->
+    <select id="getByName" resultType="org.huangzi.huangziframe.dto.HostInfoDto">
+        SELECT
+        hostInfo.ID,
+        hostInfo.HOST_ROOM,
+        hostInfo.HOST_TYPE,
+        hostInfo.HOST_FLAG,
+        hostInfo.HOST_TITLE,
+        hostInfo.HOST_NAME,
+        hostInfo.HOST_NICKNAME,
+        hostInfo.HOST_ACCOUNT,
+        hostInfo.HOST_GENDER,
+        hostInfo.HOST_AGE,
+        hostInfo.HOST_IDCARD,
+        hostInfo.HOST_PHONE,
+        hostInfo.HOST_BANK,
+        hostInfo.HOST_LOC
+        FROM HOST_INFO hostInfo
+        WHERE hostInfo.HOST_ACCOUNT = #{condition}
+        AND hostInfo.DELETE_FLAG = '0'
+    </select>
+
 </mapper>

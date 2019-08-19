@@ -24,8 +24,8 @@
             userInfo.USER_TYPE,
             userInfo.DELETE_FLAG
         FROM USER_INFO userInfo
-        WHERE userInfo.USER_NAME = #{userName}
-        AND userInfo.USER_PASSWORD = #{userPassword}
+        WHERE userInfo.USER_NAME LIKE #{userName}
+        AND userInfo.USER_PASSWORD LIKE #{userPassword}
         AND userInfo.DELETE_FLAG = 0
     </select>
 
