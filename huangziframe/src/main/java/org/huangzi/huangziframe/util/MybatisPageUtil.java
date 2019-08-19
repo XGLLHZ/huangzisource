@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @description: mybatis-plus分页工具类
  */
 @Configuration
-@MapperScan("org.huangzi.huangziframethree.mapper")
+@MapperScan("org.huangzi.huangziframe.mapper")
 public class MybatisPageUtil {
 
     /**
